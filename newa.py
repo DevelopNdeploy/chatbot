@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, render_template, session
 # from chatbot.flow_bot import FlowBasedChatbot, get_bot_response, get_enhanced_response
 from chatbot.flow_botgr import FlowBasedChatbot
-
+import os
 import uuid
 from datetime import datetime
 
@@ -287,3 +287,13 @@ if __name__ == "__main__":
     print("   • intents.json or intents2.json (intent data)")
     print("   • templates/index1.html (web interface)")
     app.run(debug=True)
+
+
+if __name__ == "__main__":
+    print("🎓 Starting Panjab University Chatbot Server...")
+    print("📁 Make sure you have these files in the same directory:")
+    print("   • flow_bot.py (chatbot logic)")
+    print("   • intents.json or intents2.json (intent data)")
+    print("   • templates/index1.html (web interface)")
+    port = int(os.environ.get("PORT", 5000))  # Render gives you a dynamic port
+    app.run(host="0.0.0.0", port=port)
