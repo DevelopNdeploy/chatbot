@@ -1,0 +1,1880 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "hello",
+        "hi",
+        "hey",
+        "good morning",
+        "good afternoon",
+        "good evening",
+        "namaste"
+      ],
+      "responses": [
+        "Hello! I'm your Panjab University Assistant. I can help you with courses, admissions, hostels, scholarships, and campus life. How would you like to begin?",
+        "Hi there! Whether you're exploring UG/PG programs or need admission help, I'm here for you. What would you like to know first?"
+      ],
+      "related_intents": [
+        "course_discovery",
+        "admission_process",
+        "hostel_facilities",
+        "scholarships"
+      ]
+    },
+    {
+      "tag": "course_discovery",
+      "patterns": [
+        "courses",
+        "programs",
+        "degrees",
+        "what courses offered",
+        "undergraduate",
+        "postgraduate",
+        "UG",
+        "PG",
+        "diploma",
+        "certificate"
+      ],
+      "responses": [
+        "Panjab University offers 200+ programs across disciplines:\n\n• Undergraduate: B.A., B.Sc., B.Com, B.Tech, BBA, BCA, B.Pharm, MBBS, BDS, LLB, B.Ed\n• Postgraduate: M.A., M.Sc., M.Com, M.Tech, MBA, MCA, M.Pharm, LLM, M.Ed\n• Doctoral: Ph.D. in Science, Humanities, Engineering, Law, and Management\n\nWhich level or field interests you?"
+      ],
+      "related_intents": [
+        "btech_selection",
+        "mba_selection",
+        "bca_selection",
+        "mbbs_selection",
+        "bcom_selection",
+        "msc_selection"
+      ]
+    },
+    {
+      "tag": "btech_selection",
+      "patterns": [
+        "btech",
+        "engineering",
+        "Bachelor of Technology",
+        "b tech",
+        "computer science",
+        "mechanical",
+        "civil",
+        "electrical"
+      ],
+      "responses": [
+        "BTech at PU is a 4-year program with 5 specializations:\n\n1. Computer Science & Engineering (CSE)\n2. Electronics & Communication (ECE)\n3. Mechanical Engineering\n4. Civil Engineering\n5. Electrical Engineering\n\nAdmission: Based on JEE Main + PU-CET\nFees: ₹92,460/year (General), ₹25,000 (Reserved)\nSeats: 60 per branch\nCampus: Sector 25\n\nWant details on eligibility, fees, or placements?"
+      ],
+      "related_intents": [
+        "btech_eligibility",
+        "btech_fees",
+        "btech_placement",
+        "admission_process"
+      ]
+    },
+    {
+      "tag": "btech_eligibility",
+      "patterns": [
+        "btech eligibility",
+        "engineering eligibility",
+        "btech admission criteria",
+        "who can apply btech",
+        "btech requirements"
+      ],
+      "responses": [
+        "BTech Eligibility Criteria:\n\n• 10+2 with Physics, Chemistry, Mathematics\n• Minimum 60% marks (55% for reserved categories)\n• JEE Main qualification mandatory\n• Age limit: 25 years (28 for reserved)\n• Valid JEE Main scorecard\n\nAdditional Requirements:\n• PU-CET exam (separate from JEE)\n• Document verification\n• Medical fitness certificate"
+      ],
+      "related_intents": [
+        "btech_selection",
+        "entrance_exams",
+        "document_checklist"
+      ]
+    },
+    {
+      "tag": "btech_fees",
+      "patterns": [
+        "btech fees",
+        "engineering fees",
+        "btech cost",
+        "how much btech",
+        "btech fee structure"
+      ],
+      "responses": [
+        "BTech Fee Structure (Per Year):\n\n• General Category: ₹92,460\n• SC/ST/OBC: ₹25,000\n• Hostel: ₹12,520 - ₹65,160 (optional)\n• Mess: ₹6,020/semester\n• Security Deposit: ₹5,000 (refundable)\n• Lab Fee: ₹2,500\n\nTotal 4-year Cost:\n• General: ₹3.7 L approx\n• Reserved: ₹1.0 L approx"
+      ],
+      "related_intents": [
+        "btech_selection",
+        "scholarships",
+        "fee_payment"
+      ]
+    },
+    {
+      "tag": "btech_placement",
+      "patterns": [
+        "btech placement",
+        "engineering placement",
+        "btech jobs",
+        "btech companies",
+        "btech salary"
+      ],
+      "responses": [
+        "BTech Placement Statistics:\n\n• Placement Rate: 95%\n• Average CTC: ₹6-8 LPA\n• Highest CTC: ₹45 LPA\n\nTop Recruiters:\n• IT: TCS, Infosys, Wipro, Amazon, Google\n• Core: L&T, Tata Steel, BHEL\n• Consulting: Deloitte, Accenture\n\nPlacement Support:\n• Training programs\n• Mock interviews\n• Resume building\n• Industry connects"
+      ],
+      "related_intents": [
+        "btech_selection",
+        "career_counseling",
+        "internships"
+      ]
+    },
+    {
+      "tag": "mba_selection",
+      "patterns": [
+        "mba",
+        "master of business administration",
+        "business",
+        "management",
+        "pgdm"
+      ],
+      "responses": [
+        "MBA at PU is a 2-year full-time program with 5 specializations:\n\n1. Finance\n2. Marketing\n3. Human Resource\n4. Operations\n5. International Business\n\nAdmission: PUMET / CAT / MAT\nFees: ₹4.92 L for full program\nSeats: 120\nCampus: Sector 14\n\nWant eligibility, fees, or placement details?"
+      ],
+      "related_intents": [
+        "mba_eligibility",
+        "mba_fees",
+        "mba_placement",
+        "pumet_exam"
+      ]
+    },
+    {
+      "tag": "mba_eligibility",
+      "patterns": [
+        "mba eligibility",
+        "mba admission criteria",
+        "who can apply mba",
+        "mba requirements"
+      ],
+      "responses": [
+        "MBA Eligibility Criteria:\n\n• Bachelor's degree in any discipline\n• Minimum 50% marks (45% for reserved)\n• Valid PUMET/CAT/MAT/XAT score\n• Work experience preferred but not mandatory\n• Age limit: No upper age limit\n\nSelection Process:\n• Entrance test score (60%)\n• Group Discussion (20%)\n• Personal Interview (20%)"
+      ],
+      "related_intents": [
+        "mba_selection",
+        "pumet_exam",
+        "entrance_exams"
+      ]
+    },
+    {
+      "tag": "mba_fees",
+      "patterns": [
+        "mba fees",
+        "mba cost",
+        "how much mba",
+        "mba fee structure"
+      ],
+      "responses": [
+        "MBA Fee Structure (2-Year Program):\n\n• Total Program Fee: ₹4.92 Lakhs\n• Per Year: ₹2.46 Lakhs\n• Per Semester: ₹1.23 Lakhs\n• Hostel: ₹12,520 - ₹65,160/year (optional)\n• Security Deposit: ₹10,000 (refundable)\n\nPayment Schedule:\n• Two installments per year\n• Scholarship opportunities available"
+      ],
+      "related_intents": [
+        "mba_selection",
+        "scholarships",
+        "fee_payment"
+      ]
+    },
+    {
+      "tag": "mba_placement",
+      "patterns": [
+        "mba placement",
+        "mba jobs",
+        "mba companies",
+        "mba salary"
+      ],
+      "responses": [
+        "MBA Placement Highlights:\n\n• Placement Rate: 92%\n• Average CTC: ₹8-12 LPA\n• Highest CTC: ₹25 LPA\n\nTop Recruiters:\n• Banking: HDFC, ICICI, SBI, Axis\n• Consulting: Deloitte, PwC, EY, KPMG\n• FMCG: HUL, P&G, Nestle\n• IT: TCS, Infosys, Amazon\n\nRoles: Manager, Analyst, Consultant, Executive"
+      ],
+      "related_intents": [
+        "mba_selection",
+        "career_counseling"
+      ]
+    },
+    {
+      "tag": "pumet_exam",
+      "patterns": [
+        "pumet",
+        "pumet exam",
+        "mba entrance",
+        "pumet syllabus",
+        "pumet pattern"
+      ],
+      "responses": [
+        "PUMET (Panjab University Management Entrance Test):\n\n• Duration: 2 hours\n• Mode: Online (Computer-based)\n• Sections: Quantitative, Verbal, Logical, General Knowledge\n• Total Questions: 100\n• Marking: +1 for correct, -0.25 for wrong\n\nSyllabus:\n• Class 10-12 level\n• Current affairs\n• Basic management concepts\n\nExam Date: July 2025"
+      ],
+      "related_intents": [
+        "mba_selection",
+        "entrance_exams",
+        "syllabus"
+      ]
+    },
+    {
+      "tag": "bca_selection",
+      "patterns": [
+        "bca",
+        "bachelor of computer applications",
+        "computer course",
+        "it course"
+      ],
+      "responses": [
+        "BCA at PU is a 3-year undergraduate program in Computer Applications.\n\n• Intake: 60 students\n• Admission: Based on 12th marks (Maths preferred)\n• Fees: ₹480/year\n• Curriculum: C, C++, Java, DBMS, Web Dev, Software Engineering\n• Campus: Sector 14\n\nWant to know about eligibility or career options?"
+      ],
+      "related_intents": [
+        "bca_eligibility",
+        "bca_career",
+        "admission_process"
+      ]
+    },
+    {
+      "tag": "bca_eligibility",
+      "patterns": [
+        "bca eligibility",
+        "bca admission criteria",
+        "who can apply bca"
+      ],
+      "responses": [
+        "BCA Eligibility Criteria:\n\n• 10+2 from recognized board\n• Mathematics as subject (preferred)\n• Minimum 50% marks (45% for reserved)\n• Age limit: No upper age limit\n• English as compulsory subject\n\nAdmission Process:\n• Merit-based (12th marks)\n• Document verification\n• Counseling session"
+      ],
+      "related_intents": [
+        "bca_selection",
+        "admission_process"
+      ]
+    },
+    {
+      "tag": "bca_career",
+      "patterns": [
+        "bca career",
+        "bca jobs",
+        "after bca",
+        "bca opportunities"
+      ],
+      "responses": [
+        "BCA Career Opportunities:\n\n• Software Developer/Programmer\n• Web Designer/Developer\n• Database Administrator\n• System Analyst\n• IT Support Executive\n• Mobile App Developer\n\nFurther Studies:\n• MCA (Master of Computer Applications)\n• MSc IT/Computer Science\n• MBA (IT Management)\n\nStarting Salary: ₹2-5 LPA"
+      ],
+      "related_intents": [
+        "bca_selection",
+        "mca_selection"
+      ]
+    },
+    {
+      "tag": "mbbs_selection",
+      "patterns": [
+        "mbbs",
+        "medical",
+        "doctor",
+        "neet",
+        "medicine course"
+      ],
+      "responses": [
+        "MBBS at PU is a 5.5-year program (4.5 + 1-year internship) affiliated with Government Medical College, Chandigarh.\n\n• Intake: 150 seats\n• Admission: NEET UG qualified candidates\n• Fees: ₹8.5 L for full course\n• Clinical Training: At PGI Chandigarh\n• Campus: Sector 14\n\nNeed NEET cutoff or hostel details?"
+      ],
+      "related_intents": [
+        "mbbs_eligibility",
+        "mbbs_fees",
+        "clinical_training",
+        "hostel_facilities"
+      ]
+    },
+    {
+      "tag": "mbbs_eligibility",
+      "patterns": [
+        "mbbs eligibility",
+        "medical eligibility",
+        "neet requirements",
+        "mbbs criteria"
+      ],
+      "responses": [
+        "MBBS Eligibility Criteria:\n\n• NEET UG qualification mandatory\n• 10+2 with Physics, Chemistry, Biology, English\n• Minimum 50% marks (40% for reserved)\n• Age: 17-25 years (30 for reserved)\n• Valid NEET scorecard\n\nCutoff (Previous Year):\n• General: 550-580\n• OBC: 520-550\n• SC: 480-520\n• ST: 450-480"
+      ],
+      "related_intents": [
+        "mbbs_selection",
+        "neet_cutoff"
+      ]
+    },
+    {
+      "tag": "mbbs_fees",
+      "patterns": [
+        "mbbs fees",
+        "medical fees",
+        "mbbs cost",
+        "medical college fees"
+      ],
+      "responses": [
+        "MBBS Fee Structure (5.5 Years):\n\n• Total Course Fee: ₹8.5 Lakhs\n• Per Year: ₹1.55 Lakhs approx\n• Development Fee: ₹50,000 (one-time)\n• Hostel: ₹12,520 - ₹65,160/year\n• Mess: ₹6,020/semester\n• Books & Equipment: ₹30,000/year\n\nTotal with hostel: ₹12-15 Lakhs"
+      ],
+      "related_intents": [
+        "mbbs_selection",
+        "scholarships"
+      ]
+    },
+    {
+      "tag": "clinical_training",
+      "patterns": [
+        "clinical training",
+        "medical training",
+        "hospital training",
+        "mbbs practical"
+      ],
+      "responses": [
+        "Clinical Training Details:\n\n• Location: PGI Chandigarh (Premier Institute)\n• Duration: 3 years (Phase 2 & 3)\n• Departments: Medicine, Surgery, Pediatrics, OB-GYN, etc.\n• Patient exposure: High volume cases\n• Faculty: Renowned specialists\n• Facilities: State-of-the-art equipment\n\nInternship:\n• 1-year rotatory internship\n• Monthly stipend provided\n• All major departments covered"
+      ],
+      "related_intents": [
+        "mbbs_selection",
+        "pgi_facilities"
+      ]
+    },
+    {
+      "tag": "bcom_selection",
+      "patterns": [
+        "bcom",
+        "bachelor of commerce",
+        "commerce",
+        "b.com"
+      ],
+      "responses": [
+        "B.Com at PU is a 3-year undergraduate program:\n\n• Specializations: General, Honors, Computer Applications\n• Intake: 200+ students\n• Admission: Merit-based (12th marks)\n• Fees: ₹3,940/year\n• Campus: Sector 14\n• Duration: 3 years (6 semesters)\n\nSubjects: Accounting, Economics, Business Studies, Statistics, Computer Applications"
+      ],
+      "related_intents": [
+        "bcom_eligibility",
+        "commerce_career",
+        "mcom_selection"
+      ]
+    },
+    {
+      "tag": "msc_selection",
+      "patterns": [
+        "msc",
+        "master of science",
+        "postgraduate science",
+        "m.sc"
+      ],
+      "responses": [
+        "M.Sc Programs at PU (2-year):\n\n• Physics, Chemistry, Mathematics\n• Biology, Biotechnology, Microbiology\n• Computer Science, IT\n• Environmental Science\n• Statistics, Economics\n\nAdmission: PU-CET PG + Merit\nFees: ₹9,460 - ₹3,92,376/year\nSeats: 30-50 per subject"
+      ],
+      "related_intents": [
+        "msc_eligibility",
+        "research_opportunities",
+        "phd_programs"
+      ]
+    },
+    {
+      "tag": "admission_process",
+      "patterns": [
+        "admission process",
+        "how to apply",
+        "application",
+        "steps",
+        "online form",
+        "when do admissions start"
+      ],
+      "responses": [
+        "Admission Process 2025:\n\nStep 1: Register at ugadmissions.puchd.ac.in (UG) or onlineadmissions.puchd.ac.in (PG)\nStep 2: Fill form, upload documents (photo, signature, certificates)\nStep 3: Pay fee (₹1,000 for UG, ₹1,500 for PG)\nStep 4: Appear for PU-CET / PUMET / JEE / NEET as applicable\nStep 5: Check merit list\nStep 6: Document verification & seat confirmation\n\nApplications open: April 2025"
+      ],
+      "related_intents": [
+        "document_checklist",
+        "application_deadlines",
+        "fee_payment",
+        "entrance_exams"
+      ]
+    },
+    {
+      "tag": "document_checklist",
+      "patterns": [
+        "documents",
+        "document checklist",
+        "checklist",
+        "required documents",
+        "document list",
+        "what documents",
+        "what to submit",
+        "certificates",
+        "proofs",
+        "papers needed",
+        "admission documents",
+        "documents needed",
+        "document requirements"
+      ],
+      "responses": [
+        "Required Documents:\n\n• 10th & 12th mark sheets and certificates\n• Graduation certificate (for PG)\n• Category certificate (SC/ST/OBC)\n• Income certificate (for scholarships)\n• Aadhaar card\n• Passport-size photo & signature\n• NEET/JEE/PUMET scorecard (if applicable)\n• Migration certificate (if from outside PU)\n\nAll documents must be uploaded in PDF/JPG format (<2MB)."
+      ],
+      "related_intents": [
+        "admission_process",
+        "sc_st_support",
+        "pwd_support"
+      ]
+    },
+    {
+      "tag": "application_deadlines",
+      "patterns": [
+        "deadlines",
+        "last date",
+        "closing date",
+        "when to apply",
+        "admission dates",
+        "application timeline"
+      ],
+      "responses": [
+        "Key Admission Deadlines 2025:\n\n• UG Applications: April 15 - June 30\n• PG Applications: May 1 - July 15\n• PU-CET Exam: July 10-20\n• PUMET Exam: July 5-15\n• Merit List: August 1 (Phase 1)\n• Document Verification: August 5-15\n• Late Applications: Not accepted\n\nStay updated at admissions.puchd.ac.in"
+      ],
+      "related_intents": [
+        "admission_process",
+        "entrance_exams",
+        "fee_payment"
+      ]
+    },
+    {
+      "tag": "entrance_exams",
+      "patterns": [
+        "entrance exam",
+        "pu-cet",
+        "pumet",
+        "jee",
+        "neet",
+        "cat",
+        "mat",
+        "exam pattern",
+        "syllabus"
+      ],
+      "responses": [
+        "PU Entrance Exams 2025:\n\n• PU-CET UG: For B.Sc, B.Com, B.A, B.Ed\n• PU-CET PG: For M.Sc, M.A, M.Com\n• PUMET: For MBA, MCA, BBA, BCA\n• JEE Main: For BTech\n• NEET: For MBBS, BDS\n• CAT/MAT: For MBA (alternative)\n\nExams conducted in July\nMode: Online\nDuration: 90 minutes\nSyllabus: Class 11-12 or graduation level"
+      ],
+      "related_intents": [
+        "admission_process",
+        "application_deadlines",
+        "syllabus"
+      ]
+    },
+    {
+      "tag": "syllabus",
+      "patterns": [
+        "syllabus",
+        "exam syllabus",
+        "study material",
+        "what to study",
+        "exam pattern"
+      ],
+      "responses": [
+        "Entrance Exam Syllabus:\n\n• PU-CET UG: Class 11-12 (PCM/PCB/Commerce as per course)\n• PU-CET PG: Graduation level subjects\n• PUMET: Quantitative, Verbal, Logical, GK\n• JEE Main: Physics, Chemistry, Mathematics\n• NEET: Physics, Chemistry, Biology\n\nStudy Material:\n• Official PU syllabus available online\n• Previous year papers\n• Reference books recommended"
+      ],
+      "related_intents": [
+        "entrance_exams",
+        "study_material"
+      ]
+    },
+    {
+      "tag": "fees_structure",
+      "patterns": [
+        "fees",
+        "fee structure",
+        "tuition",
+        "cost",
+        "how much",
+        "payment",
+        "installments"
+      ],
+      "responses": [
+        "Fee Structure 2025:\n\n• BTech: ₹92,460/year (General), ₹25,000 (SC/ST)\n• MBA: ₹4.92 L for full program\n• BCA: ₹480/year\n• MBBS: ₹8.5 L for full course\n• MSc: ₹9,460 - ₹3,92,376/year\n\nPayment Options:\n• Online: Credit/Debit/Net Banking\n• Offline: Bank challan\n• Installments: Two per year\n• Scholarships available"
+      ],
+      "related_intents": [
+        "scholarships",
+        "fee_payment",
+        "financial_aid"
+      ]
+    },
+    {
+      "tag": "fee_payment",
+      "patterns": [
+        "how to pay fees",
+        "fee payment",
+        "online payment",
+        "bank challan",
+        "receipt",
+        "payment confirmation"
+      ],
+      "responses": [
+        "Fee Payment Process:\n\n1. Login to student portal: student.pu.ac.in\n2. Go to 'Fee Payment' section\n3. Select semester and fee type\n4. Pay via:\n   • Credit/Debit Card\n   • Net Banking\n   • UPI\n   • Bank Challan (SBI, PNB)\n5. Download payment receipt\n6. Print and keep for records\n\nDeadline: 15 days after admission"
+      ],
+      "related_intents": [
+        "fees_structure",
+        "admission_process",
+        "financial_aid"
+      ]
+    },
+    {
+      "tag": "financial_aid",
+      "patterns": [
+        "financial aid",
+        "financial help",
+        "fee assistance",
+        "money help",
+        "loan"
+      ],
+      "responses": [
+        "Financial Aid Options:\n\n• Education loans from banks\n• Merit-based scholarships\n• Need-based assistance\n• SC/ST fee concessions\n• Work-study programs\n• Installment payment options\n\nEducation Loan Partners:\n• SBI, PNB, Bank of Baroda\n• HDFC Credila, Avanse\n• Up to 100% financing available\n\nContact: financialaid@pu.ac.in"
+      ],
+      "related_intents": [
+        "scholarships",
+        "fee_payment",
+        "education_loan"
+      ]
+    },
+    {
+      "tag": "scholarships",
+      "patterns": [
+        "scholarships",
+        "financial aid",
+        "fee waiver",
+        "merit scholarship",
+        "government scholarship"
+      ],
+      "responses": [
+        "Scholarship Opportunities:\n\n• Merit-cum-Means (SC/ST): ₹25,000/year (family income < ₹2.5 LPA)\n• Single Girl Child: ₹6,000/year\n• PwD Scholarship: ₹2,500 one-time + fee waiver\n• Mittal Pandey Scholarship: ₹6,000\n• UGC Scholarships: For PG students\n• Sports Scholarships: For national-level athletes\n\nApply via scholarship.pu.ac.in with Aadhaar and income proof."
+      ],
+      "related_intents": [
+        "sc_st_support",
+        "pwd_support",
+        "fee_payment"
+      ]
+    },
+    {
+      "tag": "sports_scholarships",
+      "patterns": [
+        "sports scholarship",
+        "sports quota",
+        "athlete scholarship",
+        "games scholarship"
+      ],
+      "responses": [
+        "Sports Scholarships & Quota:\n\n• National level: 100% fee waiver\n• State level: 50% fee waiver\n• University level: 25% fee waiver\n• Monthly stipend for outstanding athletes\n• Special coaching facilities\n• Flexible attendance for competitions\n\nSports Covered: Cricket, Football, Athletics, Swimming, Badminton, Basketball, etc.\n\nContact: sports@pu.ac.in"
+      ],
+      "related_intents": [
+        "sports_facilities",
+        "scholarships"
+      ]
+    },
+    {
+      "tag": "hostel_boys",
+      "patterns": [
+        "boys hostel",
+        "hostel for boys",
+        "male hostel",
+        "accommodation for boys",
+        "boys mess"
+      ],
+      "responses": [
+        "Boys Hostel Facilities:\n\n• 8 hostels in Sector 14 & 25\n• Capacity: 3,200+ students\n• Room Types: Single, double, triple occupancy\n• Fees: ₹12,520 - ₹65,160/year\n• Mess: ₹6,020/semester (3 meals/day)\n• Facilities: Wi-Fi, study rooms, gym, 24/7 security, laundry\n• Wardens: One per hostel with 24x7 availability\n\nApply via hostel.pu.ac.in after admission."
+      ],
+      "related_intents": [
+        "hostel_application",
+        "mess_facilities",
+        "hostel_fees"
+      ]
+    },
+    {
+      "tag": "hostel_girls",
+      "patterns": [
+        "girls hostel",
+        "hostel for girls",
+        "female hostel",
+        "ladies hostel",
+        "girls mess"
+      ],
+      "responses": [
+        "Girls Hostel Facilities:\n\n• 11 hostels in Sector 14 & 25\n• Capacity: 3,500+ students\n• Room Types: Single, double, triple\n• Fees: ₹12,520 - ₹65,160/year\n• Mess: ₹6,020/semester (nutritious meals)\n• Facilities: Wi-Fi, study halls, indoor games, 24/7 CCTV, medical aid\n• Hostel Superintendents: Female staff with round-the-clock support\n\nSafe, secure, and well-maintained environment."
+      ],
+      "related_intents": [
+        "hostel_application",
+        "mess_facilities",
+        "hostel_fees"
+      ]
+    },
+    {
+      "tag": "hostel_application",
+      "patterns": [
+        "how to apply for hostel",
+        "hostel registration",
+        "hostel form",
+        "hostel allotment"
+      ],
+      "responses": [
+        "Hostel Application Process:\n\n1. Apply only after taking admission\n2. Visit: hostel.pu.ac.in\n3. Login with enrollment number\n4. Fill hostel preference form\n5. Upload documents (admission proof, photo)\n6. Pay hostel fee\n7. Allotment via merit + distance criteria\n\nAllotment starts: July 2025\nLate applications not accepted."
+      ],
+      "related_intents": [
+        "hostel_boys",
+        "hostel_girls",
+        "hostel_fees"
+      ]
+    },
+    {
+      "tag": "hostel_fees",
+      "patterns": [
+        "hostel fees",
+        "hostel cost",
+        "accommodation fees",
+        "room rent"
+      ],
+      "responses": [
+        "Hostel Fee Structure (Per Year):\n\n• Single Occupancy: ₹65,160\n• Double Occupancy: ₹35,360\n• Triple Occupancy: ₹12,520\n• Security Deposit: ₹2,500 (refundable)\n• Electricity charges: As per usage\n\nMess Fees (Optional):\n• ₹6,020 per semester\n• 3 meals per day\n• Vegetarian & Non-vegetarian options"
+      ],
+      "related_intents": [
+        "hostel_boys",
+        "hostel_girls",
+        "mess_facilities"
+      ]
+    },
+    {
+      "tag": "mess_facilities",
+      "patterns": [
+        "mess",
+        "food",
+        "dining",
+        "canteen",
+        "meals"
+      ],
+      "responses": [
+        "Mess & Dining Facilities:\n\n• 15+ mess halls across hostels\n• Nutritious 3-time meals\n• Vegetarian & Non-vegetarian options\n• Special diet for medical conditions\n• Festival special meals\n• Hygienic preparation\n• Quality control measures\n\nCanteens:\n• 10+ canteens on campus\n• Affordable snacks & beverages\n• Multiple cuisine options"
+      ],
+      "related_intents": [
+        "hostel_boys",
+        "hostel_girls",
+        "campus_life"
+      ]
+    },
+    {
+      "tag": "hostel_facilities",
+      "patterns": [
+        "hostel facilities",
+        "hostel amenities",
+        "what facilities in hostel"
+      ],
+      "responses": [
+        "Hostel Facilities & Amenities:\n\n• Wi-Fi connectivity\n• 24/7 power backup\n• Study rooms & libraries\n• Recreation rooms\n• Gymnasium facilities\n• Medical aid\n• Laundry services\n• 24/7 security\n• CCTV surveillance\n• Common kitchens\n• Indoor games\n• Parking facilities"
+      ],
+      "related_intents": [
+        "hostel_boys",
+        "hostel_girls",
+        "campus_life"
+      ]
+    },
+    {
+      "tag": "cultural_events",
+      "patterns": [
+        "cultural events",
+        "cultural activities",
+        "cultural fest",
+        "cultura",
+        "cultural programs",
+        "cultural competitions"
+      ],
+      "responses": [
+        "Cultural Events at PU:\n\n• Annual Cultural Fest 'Cultura'\n• Inter-college competitions\n• Dance, Music, Drama festivals\n• Literary events & debates\n• Fashion shows & talent hunts\n• Traditional & contemporary performances\n• Celebrity performances\n• Cash prizes & certificates\n\nParticipation open to all students\nEvents throughout the academic year"
+      ],
+      "related_intents": [
+        "campus_life",
+        "clubs_societies",
+        "student_activities"
+      ]
+    },
+    {
+      "tag": "clubs_societies",
+      "patterns": [
+        "clubs",
+        "societies",
+        "student clubs",
+        "student societies",
+        "organizations",
+        "groups"
+      ],
+      "responses": [
+        "Student Clubs & Societies:\n\n• Cultural Clubs: Dance, Music, Drama, Literary\n• Technical Clubs: Robotics, Programming, Innovation\n• Sports Clubs: Cricket, Football, Badminton, etc.\n• Social Service: NSS, NCC, Rotaract\n• Academic Societies: Subject-specific groups\n• Photography & Media clubs\n• Debate & Quiz societies\n• Entrepreneurship clubs\n\nJoin multiple clubs, develop leadership skills"
+      ],
+      "related_intents": [
+        "campus_life",
+        "cultural_events",
+        "student_activities"
+      ]
+    },
+    {
+      "tag": "student_activities",
+      "patterns": [
+        "student activities",
+        "activities",
+        "extracurricular",
+        "co-curricular",
+        "student life activities"
+      ],
+      "responses": [
+        "Student Activities & Programs:\n\n• Cultural festivals & competitions\n• Sports tournaments\n• Technical workshops & hackathons\n• Social service projects\n• Industry visits & internships\n• Leadership development programs\n• Alumni interaction sessions\n• Career counseling workshops\n• Research projects\n• International exchange programs"
+      ],
+      "related_intents": [
+        "campus_life",
+        "cultural_events",
+        "clubs_societies"
+      ]
+    },
+    {
+      "tag": "international_students",
+      "patterns": [
+        "international students",
+        "foreign students",
+        "visa",
+        "overseas",
+        "global",
+        "admission for foreigners"
+      ],
+      "responses": [
+        "International Student Support:\n\n• Dedicated International Hostel\n• Visa & documentation assistance\n• Academic credential evaluation\n• Orientation programs\n• English language support\n• Multi-cuisine dining\n• Cultural exchange programs\n• Global alumni network\n• Popular Programs: Ph.D., Engineering, MBA\n\nContact: international@pu.ac.in"
+      ],
+      "related_intents": [
+        "visa_assistance",
+        "international_admission",
+        "cultural_programs"
+      ]
+    },
+    {
+      "tag": "visa_assistance",
+      "patterns": [
+        "visa assistance",
+        "visa help",
+        "student visa",
+        "visa support",
+        "visa guidance"
+      ],
+      "responses": [
+        "Visa Assistance for International Students:\n\n• Student visa application guidance\n• Document preparation support\n• Embassy liaison assistance\n• Visa renewal procedures\n• Immigration compliance\n• Legal documentation help\n• Emergency visa services\n• Work permit guidance (for eligible students)\n\nDedicated International Office:\nEmail: visa@pu.ac.in\nPhone: +91 172 2534820"
+      ],
+      "related_intents": [
+        "international_students",
+        "international_admission",
+        "document_assistance"
+      ]
+    },
+    {
+      "tag": "international_admission",
+      "patterns": [
+        "international admission",
+        "foreign admission",
+        "overseas admission",
+        "global admission"
+      ],
+      "responses": [
+        "International Admissions Process:\n\n• Online application via international portal\n• Academic transcripts evaluation\n• English proficiency: IELTS/TOEFL\n• Passport & visa documents\n• Medical fitness certificate\n• Financial proof of funds\n• No entrance exam for most programs\n• Direct admission based on merit\n\nIntake: July & January\nProcessing time: 4-6 weeks"
+      ],
+      "related_intents": [
+        "international_students",
+        "visa_assistance",
+        "document_checklist"
+      ]
+    },
+    {
+      "tag": "cultural_programs",
+      "patterns": [
+        "cultural programs",
+        "cultural activities",
+        "cultural initiatives",
+        "cultural diversity",
+        "multicultural"
+      ],
+      "responses": [
+        "Cultural Programs & Diversity:\n\n• International Cultural Exchange\n• Multicultural festivals\n• Language learning programs\n• Traditional art workshops\n• Global cuisine events\n• Cross-cultural dialogue sessions\n• Heritage celebration events\n• Student cultural presentations\n• International student mentorship\n• Cultural sensitivity programs\n\nCelebrating diversity with students from 25+ countries"
+      ],
+      "related_intents": [
+        "international_students",
+        "cultural_events",
+        "campus_life"
+      ]
+    },
+    {
+      "tag": "campus_life",
+      "patterns": [
+        "campus life",
+        "student life",
+        "activities",
+        "clubs",
+        "societies",
+        "culture",
+        "events"
+      ],
+      "responses": [
+        "Vibrant Campus Life:\n\n• 550-acre campus with green spaces\n• 100+ student clubs: Cultural, Technical, Literary\n• Annual Fest: 'Cultura' & 'TechFest'\n• Open-air theatre for performances\n• Cafeterias, bank, post office on campus\n• Active alumni network\n• Safe, inclusive environment\n\nStudents from 25+ countries"
+      ],
+      "related_intents": [
+        "cultural_events",
+        "clubs_societies",
+        "international_students",
+        "student_activities"
+      ]
+    },
+    {
+      "tag": "sports_facilities",
+      "patterns": [
+        "sports",
+        "games",
+        "gymnasium",
+        "swimming",
+        "athletics",
+        "sports complex"
+      ],
+      "responses": [
+        "Sports Infrastructure:\n\n• Olympic-size swimming pool\n• International athletics track\n• 2 cricket grounds, 2 football grounds\n• 12 badminton courts, 2 basketball courts\n• Air-conditioned gymnasium\n• 10-meter shooting range\n• Judo, wrestling, kabaddi courts\n• Professional coaching\n• Sports scholarships for athletes"
+      ],
+      "related_intents": [
+        "sports_scholarships",
+        "coaching_programs",
+        "campus_life"
+      ]
+    },
+    {
+      "tag": "coaching_programs",
+      "patterns": [
+        "coaching",
+        "training",
+        "sports coaching",
+        "professional training"
+      ],
+      "responses": [
+        "Professional Coaching Programs:\n\n• Certified coaches for all major sports\n• Individual & group training sessions\n• Sports psychology counseling\n• Fitness assessment & planning\n• Competition preparation\n• Sports medicine support\n• Nutrition guidance\n• Equipment & gear support\n\nCoaching available for: Cricket, Football, Athletics, Swimming, Badminton, Basketball, etc."
+      ],
+      "related_intents": [
+        "sports_facilities",
+        "sports_scholarships"
+      ]
+    },
+    {
+      "tag": "library_facilities",
+      "patterns": [
+        "library",
+        "books",
+        "study",
+        "research",
+        "e-library",
+        "digital resources"
+      ],
+      "responses": [
+        "Central Library Features:\n\n• 6 lakh books and journals\n• 5,000+ online full-text journals\n• INDEST & UGC-INFONET access\n• 500+ seating capacity\n• Individual study carrels\n• Group discussion rooms\n• 24x7 reading halls during exams\n• Printing, scanning, Wi-Fi\n• Departmental libraries for specialized subjects"
+      ],
+      "related_intents": [
+        "study_resources",
+        "research_facilities",
+        "academic_support"
+      ]
+    },
+    {
+      "tag": "study_resources",
+      "patterns": [
+        "study resources",
+        "study material",
+        "learning resources",
+        "academic resources"
+      ],
+      "responses": [
+        "Study Resources Available:\n\n• Extensive library collection\n• Online databases & journals\n• E-books & digital resources\n• Study group facilities\n• Tutorial support\n• Previous year question papers\n• Video lectures (MOOCs)\n• Research databases\n• Department-specific materials\n• Inter-library loan facility\n• 24/7 online access to resources"
+      ],
+      "related_intents": [
+        "library_facilities",
+        "academic_support",
+        "research_facilities"
+      ]
+    },
+    {
+      "tag": "research_facilities",
+      "patterns": [
+        "research",
+        "research facilities",
+        "lab facilities",
+        "research opportunities"
+      ],
+      "responses": [
+        "Research Facilities:\n\n• State-of-the-art laboratories\n• Advanced instrumentation\n• Research centers of excellence\n• Collaboration with industry\n• International research partnerships\n• Funding support for projects\n• Ph.D. & M.Phil programs\n• Publication opportunities\n• Research conferences & seminars\n• Innovation & incubation centers"
+      ],
+      "related_intents": [
+        "library_facilities",
+        "phd_programs",
+        "faculty_staff"
+      ]
+    },
+    {
+      "tag": "academic_support",
+      "patterns": [
+        "academic support",
+        "study help",
+        "tutoring",
+        "academic assistance"
+      ],
+      "responses": [
+        "Academic Support Services:\n\n• Tutorial classes\n• Doubt clearing sessions\n• Peer tutoring programs\n• Academic counseling\n• Study skills workshops\n• Time management training\n• Exam preparation support\n• Special coaching for slow learners\n• Faculty mentorship\n• Academic resource centers"
+      ],
+      "related_intents": [
+        "study_resources",
+        "faculty_staff",
+        "counseling_services"
+      ]
+    },
+    {
+      "tag": "faculty_staff",
+      "patterns": [
+        "faculty",
+        "staff",
+        "teachers",
+        "professors",
+        "department",
+        "hod"
+      ],
+      "responses": [
+        "Distinguished Faculty:\n\n• 700+ teaching staff\n• Professors, Associate & Assistant Professors\n• Visiting faculty from industry & abroad\n• Technical Officers for lab support\n• System Managers for IT\n• Librarians, Administrative staff\n\nContact via department websites or faculty.pu.ac.in"
+      ],
+      "related_intents": [
+        "department_info",
+        "research_opportunities",
+        "contact_faculty"
+      ]
+    },
+    {
+      "tag": "department_info",
+      "patterns": [
+        "department",
+        "departments",
+        "department information",
+        "academic departments"
+      ],
+      "responses": [
+        "Academic Departments:\n\n• Engineering & Technology\n• Arts & Humanities\n• Sciences (Physics, Chemistry, Biology)\n• Commerce & Management\n• Computer Science & IT\n• Medicine & Health Sciences\n• Law & Legal Studies\n• Education & Training\n• Social Sciences\n• Languages & Literature\n\nEach department has specialized faculty and facilities"
+      ],
+      "related_intents": [
+        "faculty_staff",
+        "course_discovery",
+        "research_facilities"
+      ]
+    },
+    {
+      "tag": "contact_faculty",
+      "patterns": [
+        "contact faculty",
+        "faculty contact",
+        "professor contact",
+        "teacher contact"
+      ],
+      "responses": [
+        "Contacting Faculty Members:\n\n• Department websites: individual faculty profiles\n• Email directory: faculty.pu.ac.in\n• Office hours: Posted outside faculty offices\n• Appointment booking: Via department office\n• Student portal: Direct messaging system\n• Phone directory: Available at reception\n\nFaculty are generally available:\n• Mon-Fri: 10 AM - 4 PM\n• By appointment: Outside regular hours"
+      ],
+      "related_intents": [
+        "faculty_staff",
+        "department_info",
+        "academic_support"
+      ]
+    },
+    {
+      "tag": "alumni_network",
+      "patterns": [
+        "alumni",
+        "famous alumni",
+        "notable graduates",
+        "network",
+        "success stories"
+      ],
+      "responses": [
+        "Notable Alumni:\n\n• Dr. Manmohan Singh - Former PM\n• Sushma Swaraj - Former EAM\n• Kiran Bedi - First woman IPS\n• Kirron Kher - Actress & MP\n• Sunil Mittal - Bharti Airtel\n• Gul Panag - Actress\n• Vandana Shiva - Environmentalist\n\nAlumni Network: 10,000+ professionals, mentorship, job referrals"
+      ],
+      "related_intents": [
+        "placement_opportunities",
+        "mentorship_programs",
+        "networking_events"
+      ]
+    },
+    {
+      "tag": "mentorship_programs",
+      "patterns": [
+        "mentorship",
+        "mentor",
+        "mentoring",
+        "guidance programs"
+      ],
+      "responses": [
+        "Mentorship Programs:\n\n• Alumni mentorship network\n• Faculty advisor system\n• Peer mentoring programs\n• Industry mentor connections\n• Career guidance sessions\n• Personal development coaching\n• Professional skill development\n• Networking opportunities\n• Regular one-on-one sessions\n• Group mentoring activities"
+      ],
+      "related_intents": [
+        "alumni_network",
+        "career_counseling",
+        "professional_development"
+      ]
+    },
+    {
+      "tag": "networking_events",
+      "patterns": [
+        "networking",
+        "networking events",
+        "professional networking",
+        "alumni meets"
+      ],
+      "responses": [
+        "Networking Events:\n\n• Annual Alumni Homecoming\n• Industry-Academia interface\n• Professional development seminars\n• Corporate interaction sessions\n• Job fairs & placement drives\n• Entrepreneurship meets\n• Research collaboration events\n• International alumni connects\n• Sector-wise networking sessions\n• Mentorship matching events"
+      ],
+      "related_intents": [
+        "alumni_network",
+        "placement_opportunities",
+        "professional_development"
+      ]
+    },
+    {
+      "tag": "placement_opportunities",
+      "patterns": [
+        "placements",
+        "jobs",
+        "recruitment",
+        "salary",
+        "companies",
+        "internships"
+      ],
+      "responses": [
+        "Placement Highlights:\n\n• 90% average placement rate\n• Top Recruiters: TCS, Infosys, Amazon, Deloitte, HDFC, ICICI, PwC\n• Average CTC: ₹4-12 LPA\n• Highest CTC: ₹45 LPA (BTech)\n• Placement Cell: Resume workshops, mock interviews\n• Internships: 2-3 months in final year\n• Alumni job referrals"
+      ],
+      "related_intents": [
+        "career_counseling",
+        "alumni_network",
+        "internships"
+      ]
+    },
+    {
+      "tag": "career_counseling",
+      "patterns": [
+        "career counseling",
+        "career guidance",
+        "career advice",
+        "career planning"
+      ],
+      "responses": [
+        "Career Counseling Services:\n\n• Individual career assessment\n• Aptitude & personality tests\n• Career path planning\n• Industry trend analysis\n• Skill gap identification\n• Professional development roadmap\n• Interview preparation\n• Resume building workshops\n• Soft skills training\n• Industry mentor connections"
+      ],
+      "related_intents": [
+        "placement_opportunities",
+        "professional_development",
+        "mentorship_programs"
+      ]
+    },
+    {
+      "tag": "internships",
+      "patterns": [
+        "internships",
+        "internship",
+        "industrial training",
+        "practical training"
+      ],
+      "responses": [
+        "Internship Opportunities:\n\n• Mandatory internships for final year\n• Duration: 2-3 months\n• Industry partnerships: 200+ companies\n• Stipend: ₹5,000 - ₹25,000/month\n• Areas: IT, Engineering, Management, Research\n• International internship programs\n• Research internships\n• Start-up collaborations\n• Credit-based internships"
+      ],
+      "related_intents": [
+        "placement_opportunities",
+        "industry_partnerships",
+        "practical_training"
+      ]
+    },
+    {
+      "tag": "professional_development",
+      "patterns": [
+        "professional development",
+        "skill development",
+        "professional skills",
+        "career development"
+      ],
+      "responses": [
+        "Professional Development Programs:\n\n• Soft skills workshops\n• Communication training\n• Leadership development\n• Technical skill enhancement\n• Industry certification courses\n• Personality development\n• Public speaking training\n• Team building activities\n• Entrepreneurship development\n• Digital literacy programs"
+      ],
+      "related_intents": [
+        "career_counseling",
+        "skill_development",
+        "leadership_training"
+      ]
+    },
+    {
+      "tag": "medical_facilities",
+      "patterns": [
+        "medical",
+        "health center",
+        "hospital",
+        "dispensary",
+        "counseling",
+        "mental health"
+      ],
+      "responses": [
+        "Medical & Wellness Support:\n\n• On-campus health center with doctors\n• Emergency medical aid\n• Mental health counseling\n• Health check-ups\n• First aid in all departments\n• PGI Chandigarh nearby for advanced care\n• Health awareness programs\n• Fitness & wellness guidance"
+      ],
+      "related_intents": [
+        "health_insurance",
+        "emergency_contacts",
+        "mental_health"
+      ]
+    },
+    {
+      "tag": "mental_health",
+      "patterns": [
+        "mental health",
+        "counseling",
+        "psychological support",
+        "stress management"
+      ],
+      "responses": [
+        "Mental Health & Counseling:\n\n• Professional counselors available\n• Stress management workshops\n• Peer support groups\n• Crisis intervention services\n• Confidential counseling sessions\n• Mental wellness programs\n• Study stress management\n• Relationship counseling\n• Career anxiety support\n• 24/7 helpline available"
+      ],
+      "related_intents": [
+        "medical_facilities",
+        "counseling_services",
+        "wellness_programs"
+      ]
+    },
+    {
+      "tag": "counseling_services",
+      "patterns": [
+        "counseling",
+        "counseling services",
+        "personal counseling",
+        "guidance"
+      ],
+      "responses": [
+        "Counseling Services:\n\n• Academic counseling\n• Personal counseling\n• Career guidance\n• Mental health support\n• Relationship counseling\n• Financial counseling\n• Peer counseling programs\n• Group therapy sessions\n• Crisis counseling\n• Family counseling support"
+      ],
+      "related_intents": [
+        "mental_health",
+        "academic_support",
+        "career_counseling"
+      ]
+    },
+    {
+      "tag": "contact_information",
+      "patterns": [
+        "contact",
+        "phone",
+        "email",
+        "address",
+        "helpline",
+        "enquiry",
+        "office"
+      ],
+      "responses": [
+        "Contact Panjab University:\n\n• Toll-Free: 1800-180-2065\n• Phone: +91 172 2534818, 2534866\n• Email: admissions@pu.ac.in\n• Website: admissions.puchd.ac.in\n• Office Hours: 9:30 AM - 1:00 PM & 2:30 PM - 5:00 PM (Mon-Fri)\n• Address: Sector 14, Chandigarh - 160014\n\nFor reappear exams: coe@pu.ac.in | 2534813"
+      ],
+      "related_intents": [
+        "admission_office",
+        "examination_office",
+        "help_desk"
+      ]
+    },
+    {
+      "tag": "admission_office",
+      "patterns": [
+        "admission office",
+        "admission contact",
+        "admission enquiry"
+      ],
+      "responses": [
+        "Admission Office Contact:\n\n• Phone: +91 172 2534818, 2534866\n• Email: admissions@pu.ac.in\n• Helpline: 1800-180-2065\n• Office: Administrative Block, Sector 14\n• Timings: 9:30 AM - 1:00 PM, 2:30 PM - 5:00 PM\n• Walk-in enquiry welcome\n• Online chat support available\n\nSpecialized counters for UG, PG, and International admissions"
+      ],
+      "related_intents": [
+        "contact_information",
+        "admission_process",
+        "help_desk"
+      ]
+    },
+    {
+      "tag": "examination_office",
+      "patterns": [
+        "examination office",
+        "exam office",
+        "coe",
+        "controller of examinations"
+      ],
+      "responses": [
+        "Controller of Examinations Office:\n\n• Email: coe@pu.ac.in\n• Phone: +91 172 2534813, 2534811\n• Services: Exam forms, Results, Certificates\n• Reappear exam applications\n• Transcript & degree verification\n• Grade sheets & migration certificates\n• Exam schedule information\n\nOffice Hours: 9:30 AM - 1:00 PM, 2:30 PM - 5:00 PM"
+      ],
+      "related_intents": [
+        "reappear_exams",
+        "results_transcripts",
+        "contact_information"
+      ]
+    },
+    {
+      "tag": "help_desk",
+      "patterns": [
+        "help desk",
+        "help",
+        "support",
+        "assistance"
+      ],
+      "responses": [
+        "Help Desk Services:\n\n• General enquiries: 1800-180-2065\n• Technical support: IT helpdesk\n• Student services: Student welfare office\n• Academic queries: Academic office\n• Hostel issues: Hostel office\n• Fee queries: Accounts section\n• 24/7 emergency support\n• Online ticketing system\n• Live chat support on website"
+      ],
+      "related_intents": [
+        "contact_information",
+        "student_services",
+        "technical_support"
+      ]
+    },
+    {
+      "tag": "sc_st_support",
+      "patterns": [
+        "sc st cell",
+        "scheduled caste",
+        "scheduled tribe",
+        "reservation",
+        "quota",
+        "caste certificate"
+      ],
+      "responses": [
+        "SC/ST Student Support:\n\n• Dedicated SC/ST Cell\n• Counseling & academic mentoring\n• Fee concessions & scholarships\n• Book grants & travel allowance\n• Remedial coaching\n• Grievance redressal\n• Caste certificate verification\n• Document assistance\n\nContact: scstcell@pu.ac.in | 2534815"
+      ],
+      "related_intents": [
+        "scholarships",
+        "reservation_procedure",
+        "sc_st_cell_contact"
+      ]
+    },
+    {
+      "tag": "reservation_procedure",
+      "patterns": [
+        "reservation",
+        "reservation process",
+        "quota system",
+        "reserved seats"
+      ],
+      "responses": [
+        "Reservation Policy:\n\n• SC: 15% seats reserved\n• ST: 7.5% seats reserved\n• OBC: 27% seats reserved\n• PwD: 3% horizontal reservation\n• Women: 33% in applicable courses\n• Economically Weaker Sections: 10%\n\nDocument Requirements:\n• Valid caste/category certificate\n• Income certificate (if applicable)\n• Disability certificate (for PwD)"
+      ],
+      "related_intents": [
+        "sc_st_support",
+        "pwd_support",
+        "document_checklist"
+      ]
+    },
+    {
+      "tag": "pwd_support",
+      "patterns": [
+        "pwd",
+        "disability support",
+        "differently abled",
+        "accessible",
+        "eoс-pwds"
+      ],
+      "responses": [
+        "Support for Persons with Disabilities:\n\n• EOC-PwDs Cell\n• Wheelchair ramps & accessible washrooms\n• Scribing facilities in exams\n• Extended time for exams\n• Assistive technology\n• Fee concessions\n• Special hostel accommodations\n• Sign language interpreters\n• Academic assistance\n\nContact: eoc-pwds@pu.ac.in"
+      ],
+      "related_intents": [
+        "accessibility_assessment",
+        "disability_scholarships",
+        "special_facilities"
+      ]
+    },
+    {
+      "tag": "accessibility_assessment",
+      "patterns": [
+        "accessibility",
+        "accessibility assessment",
+        "campus accessibility",
+        "barrier free"
+      ],
+      "responses": [
+        "Campus Accessibility Features:\n\n• Wheelchair accessible pathways\n• Ramps in all buildings\n• Accessible parking spaces\n• Braille signage\n• Audio announcements\n• Accessible library facilities\n• Special transport arrangements\n• Accessible hostel rooms\n• Modified examination procedures\n• Assistive technology labs"
+      ],
+      "related_intents": [
+        "pwd_support",
+        "special_facilities",
+        "campus_infrastructure"
+      ]
+    },
+    {
+      "tag": "disability_scholarships",
+      "patterns": [
+        "disability scholarship",
+        "pwd scholarship",
+        "differently abled scholarship"
+      ],
+      "responses": [
+        "Scholarships for Persons with Disabilities:\n\n• PwD Scholarship: ₹2,500 one-time\n• Fee waiver for eligible students\n• Government scholarships available\n• Special equipment grants\n• Travel allowance for outstation students\n• Book grants & study materials\n• Assistive device funding\n• Merit-based additional scholarships\n\nContact EOC-PwDs Cell for applications"
+      ],
+      "related_intents": [
+        "pwd_support",
+        "scholarships",
+        "financial_aid"
+      ]
+    },
+    {
+      "tag": "special_facilities",
+      "patterns": [
+        "special facilities",
+        "special services",
+        "special needs",
+        "special accommodation"
+      ],
+      "responses": [
+        "Special Facilities & Services:\n\n• Customized learning support\n• Modified examination procedures\n• Special dietary arrangements\n• Personal care assistance\n• Mobility aids & equipment\n• Modified sports & recreation\n• Specialized medical support\n• Technology integration\n• Flexible attendance policies\n• Individualized support plans"
+      ],
+      "related_intents": [
+        "pwd_support",
+        "accessibility_assessment",
+        "medical_facilities"
+      ]
+    },
+    {
+      "tag": "transgender_support",
+      "patterns": [
+        "transgender",
+        "lgbtq",
+        "padcts",
+        "gender identity",
+        "inclusive campus"
+      ],
+      "responses": [
+        "Transgender Support (PADCTS):\n\n• Dedicated PADCTS Cell\n• Anti-discrimination policies\n• Safe spaces & counseling\n• Flexible hostel accommodations\n• Respectful documentation\n• Peer support groups\n• Mental health services\n• Awareness workshops\n• Career guidance\n\nContact: padcts@pu.ac.in | 2534817"
+      ],
+      "related_intents": [
+        "padcts_contact",
+        "inclusive_policies",
+        "support_groups"
+      ]
+    },
+    {
+      "tag": "inclusive_policies",
+      "patterns": [
+        "inclusive policies",
+        "inclusion",
+        "diversity policies",
+        "anti discrimination"
+      ],
+      "responses": [
+        "Inclusive Campus Policies:\n\n• Zero tolerance for discrimination\n• Gender-neutral facilities\n• Inclusive language guidelines\n• Diversity & inclusion training\n• Safe reporting mechanisms\n• Equal opportunity policies\n• Flexible identity documentation\n• Inclusive curriculum initiatives\n• Awareness & sensitivity programs\n• Regular policy reviews & updates"
+      ],
+      "related_intents": [
+        "transgender_support",
+        "campus_safety",
+        "student_rights"
+      ]
+    },
+    {
+      "tag": "support_groups",
+      "patterns": [
+        "support groups",
+        "peer support",
+        "student support",
+        "group counseling"
+      ],
+      "responses": [
+        "Student Support Groups:\n\n• Peer counseling groups\n• Academic support circles\n• Mental health support groups\n• Identity support groups\n• International student networks\n• Women empowerment groups\n• Financial hardship support\n• Career transition groups\n• Grief & loss counseling\n• Addiction recovery support"
+      ],
+      "related_intents": [
+        "counseling_services",
+        "mental_health",
+        "student_welfare"
+      ]
+    },
+    {
+      "tag": "reappear_exams",
+      "patterns": [
+        "reappear",
+        "supplementary exam",
+        "back paper",
+        "failed subject",
+        "improvement",
+        "second attempt"
+      ],
+      "responses": [
+        "Reappear/Supplementary Exams:\n\n• For failed subjects\n• Conducted regularly\n• Apply via examination portal\n• Pay fee online\n• Check schedule & admit card\n• Limited attempts as per rules\n• Maintain attendance\n• Consult advisor\n\nContact: coe@pu.ac.in | 2534813 | 2534811"
+      ],
+      "related_intents": [
+        "examination_office",
+        "academic_counseling",
+        "study_support"
+      ]
+    },
+    {
+      "tag": "campus_visit",
+      "patterns": [
+        "visit campus",
+        "campus tour",
+        "see university",
+        "open house",
+        "can I visit"
+      ],
+      "responses": [
+        "Campus Visit Options:\n\n• Daily visits: 9 AM - 5 PM (Mon-Fri)\n• Guided tours: Available on request\n• Open House: During admission season\n• Bring parents along\n• See: Academic departments, Hostels, Sports complex, Library, Labs\n\nTo Schedule:\nCall: 0172-2534848\nEmail: info@pu.ac.in\nAddress: Sector 14, Chandigarh"
+      ],
+      "related_intents": [
+        "get_directions",
+        "campus_map",
+        "best_time_to_visit"
+      ]
+    },
+    {
+      "tag": "get_directions",
+      "patterns": [
+        "directions",
+        "how to reach",
+        "location",
+        "address",
+        "route",
+        "where is pu",
+        "university location"
+      ],
+      "responses": [
+        "How to Reach Panjab University:\n\n• Address: Sector 14, Chandigarh - 160014\n• By Air: Chandigarh Airport (15 km)\n• By Train: Chandigarh Railway Station (8 km)\n• By Bus: Chandigarh Bus Stand (6 km)\n• By Car: NH-5, well connected to Delhi, Shimla\n• Local Transport: Auto, taxi, city bus\n• Campus Entry: Gate 1 (Main), Gate 2 (Hostels)\n\nLandmarks: Near PGI Hospital, Rock Garden"
+      ],
+      "related_intents": [
+        "campus_visit",
+        "campus_map",
+        "transportation"
+      ]
+    },
+    {
+      "tag": "campus_map",
+      "patterns": [
+        "campus map",
+        "map",
+        "layout",
+        "campus layout",
+        "buildings location"
+      ],
+      "responses": [
+        "Campus Layout & Map:\n\n• Total Area: 550 acres\n• Academic Block: Sector 14\n• Engineering: Sector 25\n• Hostels: Sector 14 & 25\n• Sports Complex: Central campus\n• Library: Near Admin Block\n• Medical Centre: Sector 14\n• Canteens: Multiple locations\n\nDownload detailed map: pu.ac.in/campus-map"
+      ],
+      "related_intents": [
+        "campus_visit",
+        "get_directions",
+        "campus_infrastructure"
+      ]
+    },
+    {
+      "tag": "best_time_to_visit",
+      "patterns": [
+        "best time to visit",
+        "when to visit",
+        "visit timing",
+        "good time to visit"
+      ],
+      "responses": [
+        "Best Time to Visit Campus:\n\n• Academic Hours: 9 AM - 5 PM (Mon-Fri)\n• Admission Season: March-July (more activity)\n• Weather: October-March (pleasant)\n• Avoid: Exam periods, summer holidays\n• Special Events: During cultural fests\n• Hostel Tours: 10 AM - 4 PM\n• Faculty Meetings: By appointment\n\nWeekends have limited access to departments"
+      ],
+      "related_intents": [
+        "campus_visit",
+        "admission_season",
+        "weather_info"
+      ]
+    },
+    {
+      "tag": "transportation",
+      "patterns": [
+        "transport",
+        "transportation",
+        "bus",
+        "auto",
+        "taxi",
+        "local transport"
+      ],
+      "responses": [
+        "Local Transportation:\n\n• City Bus: Route 1, 2, 7 to PU\n• Auto Rickshaw: Available 24/7\n• Taxi Services: Ola, Uber available\n• Cycle Rickshaw: For short distances\n• University Bus: For students (limited)\n• Parking: Available on campus\n• Two-wheeler: Student parking provided\n\nApproximate costs: Bus ₹5-10, Auto ₹30-50"
+      ],
+      "related_intents": [
+        "get_directions",
+        "campus_visit",
+        "parking_facilities"
+      ]
+    },
+    {
+      "tag": "campus_infrastructure",
+      "patterns": [
+        "infrastructure",
+        "campus infrastructure",
+        "buildings",
+        "facilities",
+        "amenities"
+      ],
+      "responses": [
+        "Campus Infrastructure:\n\n• 550-acre green campus\n• Modern academic buildings\n• State-of-the-art laboratories\n• Central Library & departmental libraries\n• Sports complex with all facilities\n• 19 student hostels\n• Multiple canteens & cafeterias\n• Medical centre\n• Bank & ATM facilities\n• Wi-Fi enabled campus\n• 24/7 security & CCTV"
+      ],
+      "related_intents": [
+        "campus_map",
+        "sports_facilities",
+        "library_facilities",
+        "hostel_facilities"
+      ]
+    },
+    {
+      "tag": "parking_facilities",
+      "patterns": [
+        "parking",
+        "parking facilities",
+        "vehicle parking",
+        "car parking",
+        "bike parking"
+      ],
+      "responses": [
+        "Parking Facilities:\n\n• Student parking: Two-wheelers & cars\n• Faculty parking: Designated areas\n• Visitor parking: Near main gate\n• Security: CCTV monitored\n• Charges: Nominal annual fees\n• Capacity: 2000+ vehicles\n• Electric vehicle charging: Available\n• Parking permit required for regular use\n\nContact security office for permits"
+      ],
+      "related_intents": [
+        "campus_infrastructure",
+        "security_services",
+        "transportation"
+      ]
+    },
+    {
+      "tag": "weather_info",
+      "patterns": [
+        "weather",
+        "climate",
+        "temperature",
+        "season",
+        "when to visit weather"
+      ],
+      "responses": [
+        "Chandigarh Weather & Climate:\n\n• Winter (Dec-Feb): 5-20°C, pleasant\n• Spring (Mar-Apr): 15-25°C, ideal for visits\n• Summer (May-Jun): 25-45°C, hot\n• Monsoon (Jul-Sep): 25-35°C, humid\n• Post-monsoon (Oct-Nov): 15-30°C, comfortable\n\nBest months to visit: October to March\nCarry: Light woolens in winter, cotton in summer"
+      ],
+      "related_intents": [
+        "best_time_to_visit",
+        "campus_visit"
+      ]
+    },
+    {
+      "tag": "admission_season",
+      "patterns": [
+        "admission season",
+        "admission time",
+        "when admissions start",
+        "admission calendar"
+      ],
+      "responses": [
+        "Admission Calendar 2025:\n\n• Application Start: April 1\n• UG Applications: April 15 - June 30\n• PG Applications: May 1 - July 15\n• Entrance Exams: July 1-31\n• Merit Lists: August 1-15\n• Counseling: August 15-31\n• Classes Begin: September 1\n• Late Admissions: Till seats available\n\nStay updated at admissions.puchd.ac.in"
+      ],
+      "related_intents": [
+        "application_deadlines",
+        "admission_process",
+        "best_time_to_visit"
+      ]
+    },
+    {
+      "tag": "neet_cutoff",
+      "patterns": [
+        "neet cutoff",
+        "mbbs cutoff",
+        "neet marks",
+        "medical cutoff",
+        "neet score"
+      ],
+      "responses": [
+        "NEET Cutoff for MBBS (Previous Year):\n\n• General: 550-580 marks\n• OBC: 520-550 marks\n• SC: 480-520 marks\n• ST: 450-480 marks\n• PwD: 430-480 marks\n\nAll India Quota vs State Quota cutoffs may vary\nFinal cutoff depends on:\n• Number of applicants\n• Difficulty level of NEET\n• Available seats"
+      ],
+      "related_intents": [
+        "mbbs_eligibility",
+        "mbbs_selection",
+        "entrance_exams"
+      ]
+    },
+    {
+      "tag": "pgi_facilities",
+      "patterns": [
+        "pgi",
+        "pgi facilities",
+        "hospital training",
+        "clinical facilities"
+      ],
+      "responses": [
+        "PGI Chandigarh Clinical Facilities:\n\n• India's premier medical institute\n• All super-specialty departments\n• Advanced diagnostic equipment\n• High patient volume for learning\n• Research opportunities\n• Expert faculty guidance\n• Modern operation theaters\n• ICU & emergency training\n• Telemedicine facilities\n• International standards\n\nMBBS students get excellent exposure"
+      ],
+      "related_intents": [
+        "clinical_training",
+        "mbbs_selection",
+        "medical_facilities"
+      ]
+    },
+    {
+      "tag": "mca_selection",
+      "patterns": [
+        "mca",
+        "master of computer applications",
+        "mca course",
+        "postgraduate computer"
+      ],
+      "responses": [
+        "MCA at PU is a 2-year postgraduate program:\n\n• Eligibility: BCA/B.Sc(CS)/B.Tech + Maths\n• Admission: PUMET/State-level entrance\n• Fees: ₹48,960/year\n• Seats: 60 students\n• Specializations: Software Development, Data Analytics\n• Campus: Sector 14\n• Industry partnerships for projects\n\nExcellent placement record in IT companies"
+      ],
+      "related_intents": [
+        "mca_eligibility",
+        "mca_placement",
+        "pumet_exam"
+      ]
+    },
+       {
+      "tag": "mca_eligibility",
+      "patterns": [
+        "mca eligibility",
+        "mca admission criteria",
+        "who can apply mca"
+      ],
+      "responses": [
+        "MCA Eligibility Criteria:\n\n• Bachelor's degree: BCA/B.Sc(CS)/B.Tech\n• Mathematics at 10+2 or graduation level\n• Minimum 50% marks (45% for reserved)\n• Valid PUMET/State entrance score\n• Age limit: No upper age limit\n\nPreferred backgrounds:\n• Computer Science/IT\n• Mathematics/Statistics\n• Engineering graduates"
+      ],
+      "related_intents": [
+        "mca_selection",
+        "pumet_exam",
+        "entrance_exams"
+      ]
+    },
+    {
+      "tag": "mca_placement",
+      "patterns": [
+        "mca placement",
+        "mca jobs",
+        "mca companies",
+        "mca career"
+      ],
+      "responses": [
+        "MCA Placement Statistics:\n\n• Placement Rate: 95%\n• Average CTC: ₹4-6 LPA\n• Highest CTC: ₹12 LPA\n• Top Recruiters: TCS, Infosys, Wipro, HCL, Capgemini\n• Job Roles: Software Developer, System Analyst, Database Administrator\n• Internships: Mandatory in final semester\n\nStrong industry connect ensures good placements"
+      ],
+      "related_intents": [
+        "mca_selection",
+        "placement_opportunities",
+        "career_counseling"
+      ]
+    },
+    {
+      "tag": "phd_programs",
+      "patterns": [
+        "phd",
+        "doctoral",
+        "research programs",
+        "doctorate",
+        "ph.d"
+      ],
+      "responses": [
+        "Ph.D. Programs at PU:\n\n• Available in: Sciences, Engineering, Humanities, Management, Law\n• Duration: 3-6 years\n• Admission: Entrance test + interview\n• Fellowship: UGC-JRF, CSIR, University fellowship\n• Research areas: 100+ specializations\n• Supervisor allocation: Based on research interest\n• Course work: 1 year (if required)\n\nExcellent research infrastructure & funding"
+      ],
+      "related_intents": [
+        "research_facilities",
+        "research_opportunities",
+        "fellowship_programs"
+      ]
+    },
+    {
+      "tag": "research_opportunities",
+      "patterns": [
+        "research opportunities",
+        "research projects",
+        "research work",
+        "undergraduate research"
+      ],
+      "responses": [
+        "Research Opportunities:\n\n• Student Research Projects (SRP)\n• Industry-sponsored research\n• International collaborations\n• Summer research fellowships\n• Conference presentations\n• Publication opportunities\n• Innovation & incubation center\n• Startup support\n• Patent filing assistance\n• Research competitions\n\nEncouragement for all levels - UG to Ph.D."
+      ],
+      "related_intents": [
+        "phd_programs",
+        "research_facilities",
+        "innovation_programs"
+      ]
+    },
+    {
+      "tag": "fellowship_programs",
+      "patterns": [
+        "fellowship",
+        "research fellowship",
+        "ugc jrf",
+        "csir",
+        "fellowship programs"
+      ],
+      "responses": [
+        "Fellowship Programs:\n\n• UGC-JRF: ₹31,000/month + HRA\n• CSIR Fellowship: For Science students\n• University Fellowship: For deserving candidates\n• DST-INSPIRE: For top performers\n• International fellowships: Various countries\n• Industry fellowships: Corporate partnerships\n• Duration: Up to 5 years\n• Additional research grants available\n\nContact: research@pu.ac.in"
+      ],
+      "related_intents": [
+        "phd_programs",
+        "research_opportunities",
+        "scholarships"
+      ]
+    },
+    {
+      "tag": "innovation_programs",
+      "patterns": [
+        "innovation",
+        "incubation",
+        "startup",
+        "entrepreneurship",
+        "innovation center"
+      ],
+      "responses": [
+        "Innovation & Entrepreneurship:\n\n• University Innovation Center\n• Startup incubation programs\n• Seed funding support\n• Mentorship from industry experts\n• Business plan competitions\n• Patent filing assistance\n• Technology transfer programs\n• Industry partnerships\n• Innovation challenges\n• Student startup policy\n\nSupporting student entrepreneurs since 2018"
+      ],
+      "related_intents": [
+        "research_opportunities",
+        "industry_partnerships",
+        "business_programs"
+      ]
+    },
+    {
+      "tag": "industry_partnerships",
+      "patterns": [
+        "industry partnership",
+        "industry collaboration",
+        "corporate tie-ups",
+        "industry connect"
+      ],
+      "responses": [
+        "Industry Partnerships:\n\n• 200+ corporate partners\n• Internship placements\n• Live project opportunities\n• Guest lectures by industry experts\n• Joint research programs\n• Skill development workshops\n• Placement partnerships\n• Technology transfer\n• Consultancy projects\n• Industry-relevant curriculum\n\nStrong connect with IT, Engineering, Management sectors"
+      ],
+      "related_intents": [
+        "internships",
+        "placement_opportunities",
+        "practical_training"
+      ]
+    },
+    {
+      "tag": "practical_training",
+      "patterns": [
+        "practical training",
+        "hands-on training",
+        "lab work",
+        "practical experience"
+      ],
+      "responses": [
+        "Practical Training Programs:\n\n• Well-equipped laboratories\n• Industry-standard equipment\n• Hands-on project work\n• Technical workshops\n• Field visits & trips\n• Live industry projects\n• Simulation exercises\n• Skill development programs\n• Professional training\n• Certification courses\n\nEmphasis on practical learning in all programs"
+      ],
+      "related_intents": [
+        "industry_partnerships",
+        "internships",
+        "skill_development"
+      ]
+    },
+    {
+      "tag": "skill_development",
+      "patterns": [
+        "skill development",
+        "skills training",
+        "professional skills",
+        "soft skills"
+      ],
+      "responses": [
+        "Skill Development Programs:\n\n• Communication skills\n• Technical skill enhancement\n• Leadership training\n• Digital literacy\n• Personality development\n• Public speaking\n• Time management\n• Team building\n• Problem-solving skills\n• Industry-relevant certifications\n\nRegular workshops & training sessions"
+      ],
+      "related_intents": [
+        "professional_development",
+        "career_counseling",
+        "placement_opportunities"
+      ]
+    },
+    {
+      "tag": "leadership_training",
+      "patterns": [
+        "leadership training",
+        "leadership development",
+        "leadership skills",
+        "leadership programs"
+      ],
+      "responses": [
+        "Leadership Development Programs:\n\n• Student leadership workshops\n• Leadership roles in clubs\n• Team management training\n• Decision-making skills\n• Conflict resolution\n• Public speaking & presentation\n• Project management\n• Mentoring opportunities\n• Leadership competitions\n• Alumni leadership sessions\n\nBuilding future leaders through experiential learning"
+      ],
+      "related_intents": [
+        "skill_development",
+        "clubs_societies",
+        "professional_development"
+      ]
+    },
+    {
+      "tag": "business_programs",
+      "patterns": [
+        "business programs",
+        "business courses",
+        "management programs",
+        "business education"
+      ],
+      "responses": [
+        "Business & Management Programs:\n\n• MBA: 2-year full-time\n• BBA: 3-year undergraduate\n• Executive MBA: For working professionals\n• Certificate courses in management\n• Entrepreneurship development\n• Business incubation support\n• Industry mentorship\n• Case study methodology\n• International exposure programs\n\nStrong industry connect & placement record"
+      ],
+      "related_intents": [
+        "mba_selection",
+        "bba_programs",
+        "innovation_programs"
+      ]
+    },
+    {
+      "tag": "bba_programs",
+      "patterns": [
+        "bba",
+        "bachelor of business administration",
+        "business administration",
+        "bba course"
+      ],
+      "responses": [
+        "BBA at PU is a 3-year undergraduate program:\n\n• Specializations: Marketing, Finance, HR, Operations\n• Admission: Merit-based + entrance test\n• Fees: ₹35,000/year\n• Seats: 120 students\n• Industry exposure: Internships, projects\n• Campus: Sector 14\n• Career paths: MBA, Jobs in corporate sector\n\nStrong foundation in business fundamentals"
+      ],
+      "related_intents": [
+        "business_programs",
+        "mba_selection",
+        "career_counseling"
+      ]
+    },
+    {
+      "tag": "commerce_career",
+      "patterns": [
+        "commerce career",
+        "after bcom",
+        "commerce jobs",
+        "career in commerce"
+      ],
+      "responses": [
+        "Career Options after B.Com:\n\n• Chartered Accountancy (CA)\n• Company Secretary (CS)\n• Cost & Management Accountant (CMA)\n• Banking & Finance jobs\n• Government services (SSC, Banking exams)\n• MBA for management roles\n• Teaching & Academics\n• Entrepreneurship\n• Insurance sector\n• Stock market analysis\n\nDiverse opportunities in finance & business"
+      ],
+      "related_intents": [
+        "bcom_selection",
+        "mcom_selection",
+        "career_counseling"
+      ]
+    },
+    {
+      "tag": "mcom_selection",
+      "patterns": [
+        "mcom",
+        "master of commerce",
+        "m.com",
+        "postgraduate commerce"
+      ],
+      "responses": [
+        "M.Com at PU is a 2-year postgraduate program:\n\n• Specializations: Accounting, Finance, Economics\n• Admission: Merit-based (graduation marks)\n• Fees: ₹3,940/year\n• Seats: 100 students\n• Research opportunities: M.Phil & Ph.D.\n• Campus: Sector 14\n• Career prospects: Teaching, Research, Corporate\n\nStrong foundation for academic & professional career"
+      ],
+      "related_intents": [
+        "commerce_career",
+        "bcom_selection",
+        "phd_programs"
+      ]
+    },
+    {
+      "tag": "study_material",
+      "patterns": [
+        "study material",
+        "books",
+        "reference books",
+        "study resources",
+        "recommended books"
+      ],
+      "responses": [
+        "Study Materials & Resources:\n\n• Prescribed textbooks by faculty\n• Reference books in library\n• Online databases & journals\n• E-books & digital resources\n• Previous year question papers\n• Study guides & notes\n• Video lectures (MOOCs)\n• Research databases\n• Department-specific materials\n• Inter-library loan facility\n\nComprehensive resources for all programs"
+      ],
+      "related_intents": [
+        "library_facilities",
+        "syllabus",
+        "academic_support"
+      ]
+    },
+    {
+      "tag": "education_loan",
+      "patterns": [
+        "education loan",
+        "student loan",
+        "loan for studies",
+        "financial loan"
+      ],
+      "responses": [
+        "Education Loan Options:\n\n• Bank Partners: SBI, PNB, Bank of Baroda, HDFC\n• Loan Amount: Up to ₹10-20 lakhs\n• Interest Rates: 8-12% per annum\n• Collateral: Required for loans >7.5 lakhs\n• Repayment: After course completion + 1 year\n• Processing: University assists with documentation\n• Moratorium period: During study + 6-12 months\n\nEasy documentation with university support"
+      ],
+      "related_intents": [
+        "financial_aid",
+        "fee_payment",
+        "scholarships"
+      ]
+    }
+  ]
+}

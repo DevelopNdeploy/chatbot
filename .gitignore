@@ -1,0 +1,54 @@
+# Python cache / bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+
+# Virtual environment
+venv/
+ENV/
+env/
+.venv/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# IDE / Editor files
+.vscode/
+.idea/
+
+# Logs & debug
+*.log
+*.out
+*.err
+
+# Environment / secrets
+.env
+*.secret
+*.key
+
+# Data (optional, keep if needed in repo)
+data/*.csv
+data/*.json
+data/*.xlsx
+
+# Model files (optional, large binaries)
+*.h5
+*.pt
+*.bin
+*.ckpt
+
+# Node / frontend build (if you add React or Vue later)
+node_modules/
+dist/
+build/
+
+# Backup / temporary files
+*.bak
+*.swp
+*.tmp
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/

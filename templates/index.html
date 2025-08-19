@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panjab University Smart Assistant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chat-container {
+            width: 90%;
+            max-width: 900px;
+            height: 85vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .header-left p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .stage-indicator {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.3s;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .student-profile {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 10px;
+            font-size: 12px;
+            display: none;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            word-wrap: break-word;
+            white-space: pre-line;
+        }
+
+        .user-message {
+            background: #4f46e5;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .bot-message {
+            background: #f3f4f6;
+            color: #374151;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .recommendations {
+            margin-top: 15px;
+            padding: 15px;
+            background: linear-gradient(135deg, #e0f2fe, #f0f9ff);
+            border-radius: 12px;
+            border-left: 4px solid #0284c7;
+        }
+
+        .recommendations h4 {
+            color: #0284c7;
+            font-size: 14px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .recommendation-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            color: white;
+            padding: 8px 15px;
+            margin: 4px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
+        }
+
+        .recommendation-btn:hover {
+            background: linear-gradient(135deg, #0369a1, #075985);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
+        }
+
+        .chat-input-container {
+            padding: 20px;
+            background: #f9fafb;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .quick-action-btn {
+            background: #e5e7eb;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quick-action-btn:hover {
+            background: #d1d5db;
+            transform: scale(1.05);
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        #userInput {
+            flex: 1;
+            padding: 14px 18px;
+            border: 2px solid #e5e7eb;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        #userInput:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        #sendBtn {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            border: none;
+            padding: 14px 22px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        #sendBtn:hover {
+            background: linear-gradient(135deg, #4338ca, #6d28d9);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
+        }
+
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            background: #f3f4f6;
+            padding: 12px 16px;
+            border-radius: 18px;
+            border-bottom-left-radius: 4px;
+        }
+
+        .typing-indicator span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #9ca3af;
+            margin: 0 2px;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        .debug-info {
+            font-size: 11px;
+            color: #6b7280;
+            margin-top: 8px;
+            padding: 8px;
+            background: rgba(107, 114, 128, 0.1);
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .confidence-bar {
+            height: 3px;
+            background: #e5e7eb;
+            border-radius: 2px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ef4444, #f59e0b, #10b981);
+            transition: width 0.5s ease;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 15% auto;
+            padding: 25px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .chat-container {
+                width: 95%;
+                height: 92vh;
+            }
+            
+            .message {
+                max-width: 90%;
+            }
+
+            .header-right {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .quick-actions {
+                display: none;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message {
+            animation: fadeInUp 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <div class="header-left">
+                <h1>🎓 Panjab University Assistant</h1>
+                <p>Your smart guide to courses, admissions & campus life</p>
+                <div class="student-profile" id="studentProfile">
+                    <strong>Student:</strong> <span id="studentName">Guest</span> | 
+                    <strong>Interests:</strong> <span id="studentInterests">None yet</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="stage-indicator" id="stageIndicator">Getting Started</div>
+                <button class="control-btn" onclick="toggleProfile()">👤</button>
+                <button class="control-btn" onclick="showSummary()">📊</button>
+                <button class="control-btn" onclick="resetChat()">🔄</button>
+            </div>
+        </div>
+        
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot-message">
+                Hello! Welcome to Panjab University Assistant! 🎓 I'm here to guide you through your educational journey with personalized recommendations and detailed information about our courses, admissions, and campus life.
+
+                <div class="recommendations">
+                    <h4>🚀 Let's get started:</h4>
+                    <button class="recommendation-btn" onclick="sendRecommendation('Hello')">👋 Start conversation</button>
+                    <button class="recommendation-btn" onclick="sendRecommendation('Show me available courses')">📚 Browse courses</button>
+                    <button class="recommendation-btn" onclick="sendRecommendation('I want admission information')">📝 Admission info</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="typing-indicator" id="typingIndicator">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+        <div class="chat-input-container">
+            <div class="quick-actions" id="quickActions">
+                <!-- Quick actions will be populated dynamically -->
+            </div>
+            <div class="chat-input-wrapper">
+                <input type="text" id="userInput" placeholder="Type your question here..." onkeypress="checkEnter(event)">
+                <button id="sendBtn" onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Profile Modal -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>👤 Student Profile</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="form-group">
+                <label for="studentNameInput">Name:</label>
+                <input type="text" id="studentNameInput" placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+                <label for="educationLevel">Education Level:</label>
+                <select id="educationLevel">
+                    <option value="">Select Level</option>
+                    <option value="12th">12th Grade</option>
+                    <option value="graduate">Graduate</option>
+                    <option value="postgraduate">Postgraduate</option>
+                </select>
+            </div>
+            <button class="btn-primary" onclick="saveProfile()">Save Profile</button>
+        </div>
+    </div>
+
+    <!-- Summary Modal -->
+    <div id="summaryModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📊 Conversation Summary</h2>
+                <span class="close" onclick="closeSummaryModal()">&times;</span>
+            </div>
+            <div id="summaryContent">
+                <!-- Summary content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let debugMode = true; // Set to false to hide debug information
+        let currentSession = null;
+
+        function checkEnter(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendRecommendation(text) {
+            document.getElementById('userInput').value = text;
+            sendMessage();
+        }
+
+        function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const message = userInput.value.trim();
+            
+            if (!message) return;
+
+            // Add user message to chat
+            addMessage(message, 'user');
+            userInput.value = '';
+
+            // Show typing indicator
+            showTypingIndicator();
+
+            // Send to backend
+            fetch('/get_response', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideTypingIndicator();
+                addBotMessage(data);
+                updateUI(data);
+                updateQuickActions();
+            })
+            .catch(error => {
+                hideTypingIndicator();
+                console.error('Error:', error);
+                addMessage('Sorry, I encountered an error. Please try again.', 'bot');
+            });
+        }
+
+        function addMessage(message, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            messageDiv.textContent = message;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function addBotMessage(data) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message bot-message';
+            
+            // Add main response
+            const responseText = document.createElement('div');
+            responseText.innerHTML = formatBotResponse(data.reply);
+            messageDiv.appendChild(responseText);
+
+            // Add confidence bar
+            if (data.confidence) {
+                const confidenceBar = document.createElement('div');
+                confidenceBar.className = 'confidence-bar';
+                const confidenceFill = document.createElement('div');
+                confidenceFill.className = 'confidence-fill';
+                confidenceFill.style.width = `${data.confidence * 100}%`;
+                confidenceBar.appendChild(confidenceFill);
+                messageDiv.appendChild(confidenceBar);
+            }
+
+            // Add debug info if enabled
+            if (debugMode && data.intent) {
+                const debugDiv = document.createElement('div');
+                debugDiv.className = 'debug-info';
+                debugDiv.innerHTML = `
+                    <strong>Intent:</strong> ${data.intent}<br>
+                    <strong>Confidence:</strong> ${(data.confidence * 100).toFixed(1)}%<br>
+                    <strong>Stage:</strong> ${data.current_stage}<br>
+                    <strong>Session:</strong> ${data.session_id ? data.session_id.substring(0, 8) + '...' : 'N/A'}
+                `;
+                messageDiv.appendChild(debugDiv);
+            }
+
+            // Add recommendations if available
+            if (data.recommendations && data.recommendations.length > 0) {
+                const recommendationsDiv = document.createElement('div');
+                recommendationsDiv.className = 'recommendations';
+                
+                const title = document.createElement('h4');
+                title.innerHTML = '💡 You might also ask:';
+                recommendationsDiv.appendChild(title);
+
+                data.recommendations.slice(0, 4).forEach(rec => {
+                    const button = document.createElement('button');
+                    button.className = 'recommendation-btn';
+                    button.textContent = rec;
+                    button.onclick = () => sendRecommendation(rec);
+                    recommendationsDiv.appendChild(button);
+                });
+
+                messageDiv.appendChild(recommendationsDiv);
+            }
+
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function formatBotResponse(response) {
+            // Convert markdown-like formatting to HTML
+            return response
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/•/g, '•')
+                .replace(/✅/g, '✅')
+                .replace(/🎓/g, '🎓')
+                .replace(/💼/g, '💼')
+                .replace(/💻/g, '💻')
+                .replace(/🩺/g, '🩺');
+        }
+
+        function updateUI(data) {
+            // Update stage indicator
+            const stageIndicator = document.getElementById('stageIndicator');
+            const stageNames = {
+                'initial': 'Getting Started',
+                'course_discovery': 'Exploring Courses',
+                'course_selection': 'Course Details',
+                'course_details': 'Planning',
+                'admission_guidance': 'Admission Process',
+                'campus_life': 'Campus Life',
+                'final_engagement': 'Career Focus',
+                'conversion': 'Ready to Apply',
+                'support': 'Getting Support'
+            };
+            stageIndicator.textContent = stageNames[data.current_stage] || data.current_stage;
+
+            // Update student profile if available
+            if (data.conversation_summary && data.conversation_summary.student_profile) {
+                const profile = data.conversation_summary.student_profile;
+                updateStudentProfile(profile);
+            }
+
+            // Store session ID
+            if (data.session_id) {
+                currentSession = data.session_id;
+            }
+        }
+
+        function updateStudentProfile(profile) {
+            const studentName = document.getElementById('studentName');
+            const studentInterests = document.getElementById('studentInterests');
+
+            if (profile.name) {
+                studentName.textContent = profile.name;
+            }
+
+            if (profile.preferred_courses && profile.preferred_courses.length > 0) {
+                studentInterests.textContent = profile.preferred_courses.join(', ');
+            }
+
+            // Show profile if we have some information
+            if (profile.name || profile.preferred_courses.length > 0) {
+                document.getElementById('studentProfile').style.display = 'block';
+            }
+        }
+
+        function updateQuickActions() {
+            fetch('/get_recommendations')
+                .then(response => response.json())
+                .then(data => {
+                    const quickActions = document.getElementById('quickActions');
+                    quickActions.innerHTML = '';
+                    
+                    if (data.recommendations && data.recommendations.length > 0) {
+                        data.recommendations.slice(0, 3).forEach(rec => {
+                            const button = document.createElement('button');
+                            button.className = 'quick-action-btn';
+                            button.textContent = rec;
+                            button.onclick = () => sendRecommendation(rec);
+                            quickActions.appendChild(button);
+                        });
+                    }
+                })
+                .catch(error => console.log('Could not load quick actions:', error));
+        }
+
+        function toggleProfile() {
+            document.getElementById('profileModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('profileModal').style.display = 'none';
+        }
+
+        function saveProfile() {
+            const name = document.getElementById('studentNameInput').value;
+            const educationLevel = document.getElementById('educationLevel').value;
+
+            const profileData = {};
+            if (name) profileData.name = name;
+            if (educationLevel) profileData.education_level = educationLevel;
+
+            if (Object.keys(profileData).length > 0) {
+                fetch('/set_student_info', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(profileData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    updateStudentProfile(data.student_profile);
+                    closeModal();
+                    addMessage(`Profile updated! ${name ? `Nice to meet you, ${name}!` : 'Your information has been saved.'}`, 'bot');
+                })
+                .catch(error => {
+                    console.error('Error updating profile:', error);
+                });
+            } else {
+                closeModal();
+            }
+        }
+
+        function showSummary() {
+            fetch('/get_conversation_summary')
+                .then(response => response.json())
+                .then(data => {
+                    const summaryContent = document.getElementById('summaryContent');
+                    const summary = data.summary;
+                    
+                    summaryContent.innerHTML = `
+                        <div class="form-group">
+                            <label>Current Stage:</label>
+                            <p>${summary.current_stage}</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Course Interest:</label>
+                            <p>${summary.course_interest || 'Not specified yet'}</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Preferred Courses:</label>
+                            <p>${summary.student_profile.preferred_courses.join(', ') || 'None yet'}</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Concerns Addressed:</label>
+                            <p>${summary.student_profile.concerns_addressed.join(', ') || 'None yet'}</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Engagement Level:</label>
+                            <p>${summary.student_profile.engagement_level} interactions</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Session Duration:</label>
+                            <p>${Math.floor(summary.session_duration / 60)} minutes</p>
+                        </div>
+                    `;
+                    
+                    document.getElementById('summaryModal').style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error getting summary:', error);
+                    alert('Could not load conversation summary');
+                });
+        }
+
+        function closeSummaryModal() {
+            document.getElementById('summaryModal').style.display = 'none';
+        }
+
+        function resetChat() {
+            if (confirm('Are you sure you want to start a new conversation? This will clear your current session.')) {
+                fetch('/reset_conversation', {
+                    method: 'POST'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Clear chat messages
+                    const chatMessages = document.getElementById('chatMessages');
+                    chatMessages.innerHTML = '';
+                    
+                    // Reset UI
+                    document.getElementById('stageIndicator').textContent = 'Getting Started';
+                    document.getElementById('studentProfile').style.display = 'none';
+                    document.getElementById('studentName').textContent = 'Guest';
+                    document.getElementById('studentInterests').textContent = 'None yet';
+                    document.getElementById('quickActions').innerHTML = '';
+                    
+                    // Add welcome message
+                    addMessage('Conversation reset! How can I help you today?', 'bot');
+                    updateQuickActions();
+                })
+                .catch(error => {
+                    console.error('Error resetting conversation:', error);
+                });
+            }
+        }
+
+        function showTypingIndicator() {
+            const indicator = document.getElementById('typingIndicator');
+            indicator.style.display = 'block';
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            const indicator = document.getElementById('typingIndicator');
+            indicator.style.display = 'none';
+        }
+
+        // Initialize chat
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('userInput').focus();
+            updateQuickActions();
+        });
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const profileModal = document.getElementById('profileModal');
+            const summaryModal = document.getElementById('summaryModal');
+            
+            if (event.target == profileModal) {
+                profileModal.style.display = 'none';
+            }
+            if (event.target == summaryModal) {
+                summaryModal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

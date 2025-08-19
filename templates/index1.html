@@ -1,0 +1,2208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PU Chatbot Admin Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 8px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(59, 130, 246, 0.2);
+            color: #fff;
+            transform: translateX(4px);
+        }
+
+        .nav-icon {
+            margin-right: 12px;
+            font-size: 18px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(20px);
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Page Content */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-card {
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+
+        .stat-change {
+            font-size: 14px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .stat-change.positive {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .stat-change.negative {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        /* Charts */
+        .chart-container {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chart-title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+        }
+
+        /* Tables */
+        .table-container {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .table-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th,
+        .table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .table th {
+            font-weight: 600;
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Status badges */
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+
+        .status-online {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .status-offline {
+            background: rgba(107, 114, 128, 0.2);
+            color: #9ca3af;
+        }
+
+        .status-error {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        /* Confidence bars */
+        .confidence-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 4px;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #3b82f6);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        /* Forms */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            background: rgba(15, 23, 42, 0.6);
+            color: #fff;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #fff;
+        }
+
+        /* Search and filters */
+        .search-filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            z-index: 1001;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            min-width: 250px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        .notification.error {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+
+        .notification.info {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        }
+
+        /* Loading states */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #3b82f6;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Toggle switches */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #3b82f6;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #3b82f6;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Range inputs */
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #3b82f6;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #3b82f6;
+            cursor: pointer;
+            border: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-filters {
+                flex-direction: column;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .header-actions {
+                width: 100%;
+                justify-content: stretch;
+            }
+        }
+
+        /* Additional styles for better UX */
+        .intent-performance-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .intent-performance-item:last-child {
+            border-bottom: none;
+        }
+
+        .performance-metric {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .metric-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #3b82f6;
+        }
+
+        .metric-label {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h1>🎓 PU Admin</h1>
+                <p>Chatbot Management</p>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" onclick="showPage('dashboard')">
+                        <span class="nav-icon">📊</span>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showPage('analytics')">
+                        <span class="nav-icon">📈</span>
+                        Analytics
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showPage('users')">
+                        <span class="nav-icon">👥</span>
+                        User Management
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showPage('conversations')">
+                        <span class="nav-icon">💬</span>
+                        Conversations
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showPage('intents')">
+                        <span class="nav-icon">🧠</span>
+                        Intent Management
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showPage('monitoring')">
+                        <span class="nav-icon">🖥️</span>
+                        System Monitor
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showPage('settings')">
+                        <span class="nav-icon">⚙️</span>
+                        Settings
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showPage('automation')">
+                        <span class="nav-icon">🤖</span>
+                        Automation
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Page -->
+            <div id="dashboard" class="page active">
+                <div class="header">
+                    <div>
+                        <h1>Dashboard Overview</h1>
+                        <p>Real-time insights and system status</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" onclick="refreshData()">
+                            <span>🔄</span> Refresh
+                        </button>
+                        <button class="btn btn-secondary" onclick="exportReport()">
+                            <span>📊</span> Export Report
+                        </button>
+                    </div>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card stat-card">
+                        <div class="stat-number" id="totalSessions">1,234</div>
+                        <div class="stat-label">Total Sessions</div>
+                        <div class="stat-change positive">+12% this week</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-number" id="activeUsers">89</div>
+                        <div class="stat-label">Active Users</div>
+                        <div class="stat-change positive">+5% today</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-number" id="avgConfidence">87%</div>
+                        <div class="stat-label">Avg Confidence</div>
+                        <div class="stat-change positive">+3% this month</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-number" id="systemUptime">99.9%</div>
+                        <div class="stat-label">System Uptime</div>
+                        <div class="stat-change positive">Excellent</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-title">
+                        <h3>Conversation Trends</h3>
+                        <select class="form-select" style="width: auto;" onchange="updateChart(this.value)">
+                            <option value="7">Last 7 days</option>
+                            <option value="30">Last 30 days</option>
+                            <option value="90">Last 90 days</option>
+                        </select>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="conversationChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Page -->
+            <div id="analytics" class="page">
+                <div class="header">
+                    <div>
+                        <h1>Analytics & Insights</h1>
+                        <p>Deep dive into chatbot performance and user behavior</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" onclick="generateReport()">
+                            <span>📊</span> Generate Report
+                        </button>
+                    </div>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>Intent Distribution</h3>
+                        <div style="height: 300px;">
+                            <canvas id="intentChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>User Engagement</h3>
+                        <div style="height: 300px;">
+                            <canvas id="engagementChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-title">
+                        <h3>Popular Topics</h3>
+                    </div>
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Topic</th>
+                                    <th>Frequency</th>
+                                    <th>Avg Confidence</th>
+                                    <th>Success Rate</th>
+                                </tr>
+                            </thead>
+                            <tbody id="topicsTable">
+                                <!-- Populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Management Page -->
+            <div id="users" class="page">
+                <div class="header">
+                    <div>
+                        <h1>User Management</h1>
+                        <p>Manage user accounts and permissions</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" onclick="openModal('addUserModal')">
+                            <span>👤</span> Add User
+                        </button>
+                        <button class="btn btn-secondary" onclick="exportUsers()">
+                            <span>📊</span> Export Users
+                        </button>
+                    </div>
+                </div>
+
+                <div class="search-filters">
+                    <input type="text" class="form-input search-input" placeholder="Search users..." onkeyup="filterUsers(this.value)">
+                    <select class="form-select" onchange="filterUsersByRole(this.value)">
+                        <option value="">All Roles</option>
+                        <option value="admin">Admin</option>
+                        <option value="moderator">Moderator</option>
+                        <option value="viewer">Viewer</option>
+                    </select>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3>Users List</h3>
+                        <span id="userCount">Loading...</span>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Last Login</th>
+                                <th>Sessions</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTable">
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Conversations Page -->
+            <div id="conversations" class="page">
+                <div class="header">
+                    <div>
+                        <h1>Conversation Logs</h1>
+                        <p>View and analyze user conversations</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" onclick="realTimeToggle()">
+                            <span>🔴</span> Real-time View
+                        </button>
+                        <button class="btn btn-secondary" onclick="exportConversations()">
+                            <span>💾</span> Export Logs
+                        </button>
+                    </div>
+                </div>
+
+                <div class="search-filters">
+                    <input type="text" class="form-input search-input" placeholder="Search conversations..." onkeyup="filterConversations(this.value)">
+                    <select class="form-select" onchange="filterByIntent(this.value)">
+                        <option value="">All Intents</option>
+                        <option value="course_discovery">Course Discovery</option>
+                        <option value="admission_process">Admissions</option>
+                        <option value="fees_structure">Fees</option>
+                    </select>
+                    <input type="date" class="form-input" onchange="filterByDate(this.value)">
+                </div>
+
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Session ID</th>
+                                <th>User Message</th>
+                                <th>Intent</th>
+                                <th>Confidence</th>
+                                <th>Timestamp</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="conversationsTable">
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Intent Management Page -->
+            <div id="intents" class="page">
+                <div class="header">
+                    <div>
+                        <h1>Intent Management</h1>
+                        <p>Configure and optimize chatbot intents</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" onclick="openModal('addIntentModal')">
+                            <span>🧠</span> Add Intent
+                        </button>
+                        <button class="btn btn-secondary" onclick="trainModel()">
+                            <span>🔄</span> Retrain Model
+                        </button>
+                    </div>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>Intent Performance</h3>
+                        <div id="intentPerformance">
+                            <div class="intent-performance-item">
+                                <span>Course Discovery</span>
+                                <div class="performance-metric">
+                                    <div class="metric-value">92%</div>
+                                    <div class="metric-label">Success Rate</div>
+                                </div>
+                            </div>
+                            <div class="intent-performance-item">
+                                <span>Admission Process</span>
+                                <div class="performance-metric">
+                                    <div class="metric-value">88%</div>
+                                    <div class="metric-label">Success Rate</div>
+                                </div>
+                            </div>
+                            <div class="intent-performance-item">
+                                <span>Fees Structure</span>
+                                <div class="performance-metric">
+                                    <div class="metric-value">95%</div>
+                                    <div class="metric-label">Success Rate</div>
+                                </div>
+                            </div>
+                            <div class="intent-performance-item">
+                                <span>Campus Facilities</span>
+                                <div class="performance-metric">
+                                    <div class="metric-value">85%</div>
+                                    <div class="metric-label">Success Rate</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>Training Status</h3>
+                        <div class="stat-number">Active</div>
+                        <div class="stat-label">Model Status</div>
+                        <button class="btn btn-primary" onclick="retrainModel()">Update Training</button>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3>Intent Configuration</h3>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Intent</th>
+                                <th>Patterns</th>
+                                <th>Responses</th>
+                                <th>Confidence</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="intentsTable">
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- System Monitoring Page -->
+            <div id="monitoring" class="page">
+                <div class="header">
+                    <div>
+                        <h1>System Monitoring</h1>
+                        <p>Real-time system health and performance</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" onclick="runDiagnostics()">
+                            <span>🔧</span> Run Diagnostics
+                        </button>
+                        <button class="btn btn-danger" onclick="restartSystem()">
+                            <span>⚠️</span> Restart System
+                        </button>
+                    </div>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card stat-card">
+                        <div class="stat-number" id="cpuUsage">45%</div>
+                        <div class="stat-label">CPU Usage</div>
+                        <div class="stat-change positive">Normal</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-number" id="memoryUsage">67%</div>
+                        <div class="stat-label">Memory Usage</div>
+                        <div class="stat-change positive">Good</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-number" id="responseTime">234ms</div>
+                        <div class="stat-label">Avg Response Time</div>
+                        <div class="stat-change positive">Excellent</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-number" id="errorRate">0.1%</div>
+                        <div class="stat-label">Error Rate</div>
+                        <div class="stat-change positive">Very Low</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-title">
+                        <h3>System Performance</h3>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3>System Logs</h3>
+                        <button class="btn btn-secondary" onclick="clearLogs()">Clear Logs</button>
+                    </div>
+                    <div style="height: 300px; overflow-y: auto; background: #000; padding: 15px; border-radius: 10px; font-family: monospace; font-size: 12px;">
+                        <div id="systemLogs">
+                            <!-- System logs will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Page -->
+            <div id="settings" class="page">
+                <div class="header">
+                    <div>
+                        <h1>System Settings</h1>
+                        <p>Configure chatbot behavior and system preferences</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn btn-success" onclick="saveSettings()">
+                            <span>💾</span> Save Changes
+                        </button>
+                        <button class="btn btn-secondary" onclick="resetSettings()">
+                            <span>🔄</span> Reset to Default
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="card">
+                        <h3>Chatbot Configuration</h3>
+                        <div class="form-group">
+                            <label class="form-label">Default Confidence Threshold</label>
+                            <input type="range" class="form-input" min="0" max="100" value="70" id="confidenceThreshold" oninput="updateThresholdValue(this.value)">
+                            <span id="thresholdValue">70%</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Session Timeout (minutes)</label>
+                            <input type="number" class="form-input" value="60" id="sessionTimeout">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Maximum Conversations per Session</label>
+                            <input type="number" class="form-input" value="50" id="maxConversations">
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Response Settings</h3>
+                        <div class="form-group">
+                            <label class="form-label">Enable Personalization</label>
+                            <label class="switch">
+                                <input type="checkbox" id="enablePersonalization" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Response Delay (ms)</label>
+                            <input type="number" class="form-input" value="500" id="responseDelay">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Fallback Response</label>
+                            <textarea class="form-textarea" id="fallbackResponse" placeholder="Enter fallback response for unrecognized queries...">I apologize, but I didn't understand your question. Could you please rephrase it?</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Administrative Settings</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Admin Email Notifications</label>
+                            <input type="email" class="form-input" placeholder="admin@university.edu" id="adminEmail">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Backup Frequency</label>
+                            <select class="form-select" id="backupFrequency">
+                                <option value="daily">Daily</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="monthly">Monthly</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Log Retention (days)</label>
+                            <input type="number" class="form-input" value="30" id="logRetention">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Automation Page -->
+            <div id="automation" class="page">
+                <div class="header">
+                    <div>
+                        <h1>Automation & Rules</h1>
+                        <p>Set up automated responses and system rules</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" onclick="openModal('addRuleModal')">
+                            <span>⚡</span> Add Rule
+                        </button>
+                        <button class="btn btn-secondary" onclick="testAutomation()">
+                            <span>🧪</span> Test Rules
+                        </button>
+                    </div>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>Active Automations</h3>
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Rules Running</div>
+                        <button class="btn btn-primary" onclick="manageRules()">Manage</button>
+                    </div>
+                    <div class="card">
+                        <h3>Auto-Responses</h3>
+                        <div class="stat-number">156</div>
+                        <div class="stat-label">This Week</div>
+                        <div class="stat-change positive">+23%</div>
+                    </div>
+                    <div class="card">
+                        <h3>Escalations</h3>
+                        <div class="stat-number">8</div>
+                        <div class="stat-label">To Human Agents</div>
+                        <div class="stat-change negative">-15%</div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3>Automation Rules</h3>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Rule Name</th>
+                                <th>Trigger</th>
+                                <th>Action</th>
+                                <th>Status</th>
+                                <th>Last Triggered</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="automationTable">
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <!-- Add User Modal -->
+    <div id="addUserModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New User</h2>
+                <span class="close" onclick="closeModal('addUserModal')">&times;</span>
+            </div>
+            <form id="addUserForm">
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-input" id="newUsername" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" id="newUserEmail" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Role</label>
+                    <select class="form-select" id="newUserRole" required>
+                        <option value="">Select Role</option>
+                        <option value="admin">Admin</option>
+                        <option value="moderator">Moderator</option>
+                        <option value="viewer">Viewer</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" id="newUserPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Add User</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Intent Modal -->
+    <div id="addIntentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Intent</h2>
+                <span class="close" onclick="closeModal('addIntentModal')">&times;</span>
+            </div>
+            <form id="addIntentForm">
+                <div class="form-group">
+                    <label class="form-label">Intent Name</label>
+                    <input type="text" class="form-input" id="newIntentName" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Patterns (one per line)</label>
+                    <textarea class="form-textarea" id="newIntentPatterns" placeholder="Enter training patterns..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Responses (one per line)</label>
+                    <textarea class="form-textarea" id="newIntentResponses" placeholder="Enter possible responses..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Keywords (comma separated)</label>
+                    <input type="text" class="form-input" id="newIntentKeywords">
+                </div>
+                <button type="submit" class="btn btn-primary">Add Intent</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Automation Rule Modal -->
+    <div id="addRuleModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Automation Rule</h2>
+                <span class="close" onclick="closeModal('addRuleModal')">&times;</span>
+            </div>
+            <form id="addRuleForm">
+                <div class="form-group">
+                    <label class="form-label">Rule Name</label>
+                    <input type="text" class="form-input" id="newRuleName" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Trigger Condition</label>
+                    <select class="form-select" id="newRuleTrigger" required>
+                        <option value="">Select Trigger</option>
+                        <option value="low_confidence">Low Confidence Response</option>
+                        <option value="repeated_query">Repeated Query</option>
+                        <option value="specific_intent">Specific Intent Detected</option>
+                        <option value="time_based">Time-based Trigger</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Action</label>
+                    <select class="form-select" id="newRuleAction" required>
+                        <option value="">Select Action</option>
+                        <option value="escalate">Escalate to Human</option>
+                        <option value="send_email">Send Email Alert</option>
+                        <option value="custom_response">Send Custom Response</option>
+                        <option value="log_event">Log Special Event</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Rule Configuration</label>
+                    <textarea class="form-textarea" id="newRuleConfig" placeholder="Enter rule configuration (JSON format)"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Rule</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let charts = {};
+        let currentPage = 'dashboard';
+        let realTimeMode = false;
+        let userData = [];
+        let conversationData = [];
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCharts();
+            loadDashboardData();
+            startRealTimeUpdates();
+        });
+
+        // Page navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            currentPage = pageId;
+            
+            // Load page-specific data
+            loadPageData(pageId);
+        }
+
+        // Initialize charts
+        function initializeCharts() {
+            // Conversation trends chart
+            const ctx1 = document.getElementById('conversationChart').getContext('2d');
+            charts.conversation = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Conversations',
+                        data: [120, 150, 180, 140, 200, 160, 190],
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#fff' }
+                        }
+                    },
+                    scales: {
+                        x: { 
+                            ticks: { color: '#fff' },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                        },
+                        y: { 
+                            ticks: { color: '#fff' },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                        }
+                    }
+                }
+            });
+
+            // Intent distribution chart
+            setTimeout(() => {
+                if (document.getElementById('intentChart')) {
+                    const ctx2 = document.getElementById('intentChart').getContext('2d');
+                    charts.intent = new Chart(ctx2, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Course Info', 'Admissions', 'Fees', 'Facilities', 'Other'],
+                            datasets: [{
+                                data: [35, 25, 20, 15, 5],
+                                backgroundColor: [
+                                    '#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444'
+                                ],
+                                borderWidth: 2,
+                                borderColor: '#1e293b'
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { 
+                                    labels: { color: '#fff' },
+                                    position: 'bottom'
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // Engagement chart
+                if (document.getElementById('engagementChart')) {
+                    const ctx3 = document.getElementById('engagementChart').getContext('2d');
+                    charts.engagement = new Chart(ctx3, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                            datasets: [{
+                                label: 'User Sessions',
+                                data: [45, 52, 38, 65, 58, 42, 35],
+                                backgroundColor: 'rgba(59, 130, 246, 0.6)',
+                                borderColor: '#3b82f6',
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { labels: { color: '#fff' } }
+                            },
+                            scales: {
+                                x: { 
+                                    ticks: { color: '#fff' },
+                                    grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                                },
+                                y: { 
+                                    ticks: { color: '#fff' },
+                                    grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // Performance chart
+                if (document.getElementById('performanceChart')) {
+                    const ctx4 = document.getElementById('performanceChart').getContext('2d');
+                    charts.performance = new Chart(ctx4, {
+                        type: 'line',
+                        data: {
+                            labels: generateTimeLabels(),
+                            datasets: [
+                                {
+                                    label: 'CPU Usage (%)',
+                                    data: generateRandomData(20, 30, 80),
+                                    borderColor: '#3b82f6',
+                                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                                    fill: true,
+                                    tension: 0.4
+                                },
+                                {
+                                    label: 'Memory Usage (%)',
+                                    data: generateRandomData(20, 50, 90),
+                                    borderColor: '#8b5cf6',
+                                    backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                                    fill: true,
+                                    tension: 0.4
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { labels: { color: '#fff' } }
+                            },
+                            scales: {
+                                x: { 
+                                    ticks: { color: '#fff' },
+                                    grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                                },
+                                y: { 
+                                    ticks: { color: '#fff' },
+                                    grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                                }
+                            }
+                        }
+                    });
+                }
+            }, 500);
+        }
+
+        // Load dashboard data
+        function loadDashboardData() {
+            // Simulate API calls
+            setTimeout(() => {
+                updateStats();
+                loadUsersTable();
+                loadConversationsTable();
+                loadIntentsTable();
+                loadAutomationTable();
+                updateSystemLogs();
+                loadTopicsTable();
+            }, 1000);
+        }
+
+        // Update statistics
+        function updateStats() {
+            const stats = {
+                totalSessions: Math.floor(Math.random() * 2000) + 1000,
+                activeUsers: Math.floor(Math.random() * 100) + 50,
+                avgConfidence: Math.floor(Math.random() * 20) + 80,
+                systemUptime: 99.9,
+                cpuUsage: Math.floor(Math.random() * 30) + 30,
+                memoryUsage: Math.floor(Math.random() * 40) + 50,
+                responseTime: Math.floor(Math.random() * 100) + 150,
+                errorRate: (Math.random() * 0.5).toFixed(1)
+            };
+
+            Object.keys(stats).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.textContent = typeof stats[key] === 'number' && stats[key] < 1 ? 
+                        stats[key] + '%' : 
+                        (key.includes('Time') ? stats[key] + 'ms' : 
+                         key.includes('Usage') || key.includes('Uptime') || key.includes('Rate') ? stats[key] + '%' : 
+                         stats[key]);
+                }
+            });
+        }
+
+        // Load users table
+        function loadUsersTable() {
+            userData = [
+                { name: 'Admin User', email: 'admin@pu.edu', role: 'admin', status: 'online', lastLogin: '2024-01-15 10:30', sessions: 145 },
+                { name: 'John Moderator', email: 'john@pu.edu', role: 'moderator', status: 'offline', lastLogin: '2024-01-14 16:45', sessions: 89 },
+                { name: 'Sarah Viewer', email: 'sarah@pu.edu', role: 'viewer', status: 'online', lastLogin: '2024-01-15 09:15', sessions: 34 },
+                { name: 'Mike Admin', email: 'mike@pu.edu', role: 'admin', status: 'online', lastLogin: '2024-01-15 11:00', sessions: 167 },
+                { name: 'Lisa Moderator', email: 'lisa@pu.edu', role: 'moderator', status: 'online', lastLogin: '2024-01-15 10:45', sessions: 78 }
+            ];
+
+            displayUsers(userData);
+        }
+
+        function displayUsers(users) {
+            const tbody = document.getElementById('usersTable');
+            if (!tbody) return;
+
+            tbody.innerHTML = users.map(user => `
+                <tr>
+                    <td>
+                        <div>
+                            <strong>${user.name}</strong><br>
+                            <small style="opacity: 0.7">${user.email}</small>
+                        </div>
+                    </td>
+                    <td><span class="status-badge">${user.role}</span></td>
+                    <td><span class="status-badge status-${user.status}">${user.status}</span></td>
+                    <td>${user.lastLogin}</td>
+                    <td>${user.sessions}</td>
+                    <td>
+                        <button class="btn btn-sm" onclick="editUser('${user.email}')">Edit</button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteUser('${user.email}')">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+
+            const userCount = document.getElementById('userCount');
+            if (userCount) userCount.textContent = `${users.length} users`;
+        }
+
+        // Load conversations table
+        function loadConversationsTable() {
+            conversationData = [
+                { sessionId: 'ses_001', message: 'What courses do you offer in Computer Science?', intent: 'course_discovery', confidence: 95, timestamp: '2024-01-15 11:30:25' },
+                { sessionId: 'ses_002', message: 'How to apply for admission in BTech?', intent: 'admission_process', confidence: 88, timestamp: '2024-01-15 11:25:10' },
+                { sessionId: 'ses_003', message: 'What are the fees for BTech CSE?', intent: 'fees_structure', confidence: 92, timestamp: '2024-01-15 11:20:45' },
+                { sessionId: 'ses_004', message: 'Tell me about campus facilities and hostels', intent: 'campus_facilities', confidence: 85, timestamp: '2024-01-15 11:15:30' },
+                { sessionId: 'ses_005', message: 'Scholarship information for students', intent: 'scholarship_info', confidence: 90, timestamp: '2024-01-15 11:10:15' }
+            ];
+
+            displayConversations(conversationData);
+        }
+
+        function displayConversations(conversations) {
+            const tbody = document.getElementById('conversationsTable');
+            if (!tbody) return;
+
+            tbody.innerHTML = conversations.map(conv => `
+                <tr>
+                    <td><code>${conv.sessionId}</code></td>
+                    <td style="max-width: 300px; word-wrap: break-word;">${conv.message}</td>
+                    <td><span class="status-badge">${conv.intent.replace('_', ' ')}</span></td>
+                    <td>
+                        <div class="confidence-bar">
+                            <div class="confidence-fill" style="width: ${conv.confidence}%"></div>
+                        </div>
+                        ${conv.confidence}%
+                    </td>
+                    <td><small>${conv.timestamp}</small></td>
+                    <td>
+                        <button class="btn btn-sm" onclick="viewConversation('${conv.sessionId}')">View</button>
+                        <button class="btn btn-sm btn-secondary" onclick="exportConversation('${conv.sessionId}')">Export</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Load intents table
+        function loadIntentsTable() {
+            const intents = [
+                { tag: 'course_discovery', patterns: 8, responses: 5, confidence: 92 },
+                { tag: 'admission_process', patterns: 12, responses: 7, confidence: 88 },
+                { tag: 'fees_structure', patterns: 6, responses: 4, confidence: 95 },
+                { tag: 'campus_facilities', patterns: 10, responses: 6, confidence: 85 },
+                { tag: 'scholarship_info', patterns: 7, responses: 4, confidence: 90 }
+            ];
+
+            const tbody = document.getElementById('intentsTable');
+            if (!tbody) return;
+
+            tbody.innerHTML = intents.map(intent => `
+                <tr>
+                    <td><strong>${intent.tag.replace('_', ' ')}</strong></td>
+                    <td>${intent.patterns}</td>
+                    <td>${intent.responses}</td>
+                    <td>
+                        <div class="confidence-bar">
+                            <div class="confidence-fill" style="width: ${intent.confidence}%"></div>
+                        </div>
+                        ${intent.confidence}%
+                    </td>
+                    <td>
+                        <button class="btn btn-sm" onclick="editIntent('${intent.tag}')">Edit</button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteIntent('${intent.tag}')">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Load automation table
+        function loadAutomationTable() {
+            const rules = [
+                { name: 'Low Confidence Alert', trigger: 'confidence < 70%', action: 'Send Email Alert', status: 'active', lastTriggered: '2024-01-15 10:45' },
+                { name: 'Repeated Queries', trigger: 'same_query > 3', action: 'Escalate to Human', status: 'active', lastTriggered: '2024-01-15 09:30' },
+                { name: 'After Hours Response', trigger: 'time_based', action: 'Custom Response', status: 'active', lastTriggered: '2024-01-14 22:15' },
+                { name: 'High Volume Alert', trigger: 'requests > 100/hour', action: 'Send Email Alert', status: 'inactive', lastTriggered: '2024-01-13 15:20' }
+            ];
+
+            const tbody = document.getElementById('automationTable');
+            if (!tbody) return;
+
+            tbody.innerHTML = rules.map(rule => `
+                <tr>
+                    <td><strong>${rule.name}</strong></td>
+                    <td><code>${rule.trigger}</code></td>
+                    <td>${rule.action}</td>
+                    <td><span class="status-badge status-${rule.status === 'active' ? 'online' : 'offline'}">${rule.status}</span></td>
+                    <td><small>${rule.lastTriggered}</small></td>
+                    <td>
+                        <button class="btn btn-sm" onclick="editRule('${rule.name}')">Edit</button>
+                        <button class="btn btn-sm btn-danger" onclick="toggleRule('${rule.name}')">${rule.status === 'active' ? 'Disable' : 'Enable'}</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Load topics table
+        function loadTopicsTable() {
+            const topics = [
+                { topic: 'Course Information', frequency: 245, confidence: 92, successRate: 95 },
+                { topic: 'Admission Process', frequency: 189, confidence: 88, successRate: 91 },
+                { topic: 'Fee Structure', frequency: 156, confidence: 94, successRate: 97 },
+                { topic: 'Campus Facilities', frequency: 134, confidence: 85, successRate: 89 },
+                { topic: 'Scholarship Info', frequency: 98, confidence: 87, successRate: 92 }
+            ];
+
+            const tbody = document.getElementById('topicsTable');
+            if (!tbody) return;
+
+            tbody.innerHTML = topics.map(topic => `
+                <tr>
+                    <td><strong>${topic.topic}</strong></td>
+                    <td>${topic.frequency}</td>
+                    <td>${topic.confidence}%</td>
+                    <td>${topic.successRate}%</td>
+                </tr>
+            `).join('');
+        }
+
+        // Update system logs
+        function updateSystemLogs() {
+            const logs = [
+                { timestamp: '2024-01-15 11:30:45', level: 'INFO', message: 'New user session started: ses_12345' },
+                { timestamp: '2024-01-15 11:29:32', level: 'DEBUG', message: 'Intent classification completed: course_discovery (92% confidence)' },
+                { timestamp: '2024-01-15 11:28:15', level: 'WARN', message: 'Low confidence response detected (65%)' },
+                { timestamp: '2024-01-15 11:27:08', level: 'INFO', message: 'Automation rule triggered: Low Confidence Alert' },
+                { timestamp: '2024-01-15 11:25:50', level: 'ERROR', message: 'Failed to connect to external API, using fallback response' },
+                { timestamp: '2024-01-15 11:24:33', level: 'INFO', message: 'Model retraining completed successfully' },
+                { timestamp: '2024-01-15 11:23:15', level: 'DEBUG', message: 'Processing user query: admission requirements' }
+            ];
+
+            const logsContainer = document.getElementById('systemLogs');
+            if (!logsContainer) return;
+
+            logsContainer.innerHTML = logs.map(log => `
+                <div style="margin-bottom: 5px;">
+                    <span style="color: #64748b;">[${log.timestamp}]</span>
+                    <span style="color: ${getLogLevelColor(log.level)}; font-weight: bold;">${log.level}</span>
+                    <span style="color: #e2e8f0;">${log.message}</span>
+                </div>
+            `).join('');
+        }
+
+        function getLogLevelColor(level) {
+            const colors = {
+                'INFO': '#10b981',
+                'DEBUG': '#3b82f6',
+                'WARN': '#f59e0b',
+                'ERROR': '#ef4444'
+            };
+            return colors[level] || '#e2e8f0';
+        }
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Filter functions
+        function filterUsers(searchTerm) {
+            const filteredUsers = userData.filter(user => 
+                user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                user.email.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            displayUsers(filteredUsers);
+        }
+
+        function filterUsersByRole(role) {
+            const filteredUsers = role ? userData.filter(user => user.role === role) : userData;
+            displayUsers(filteredUsers);
+        }
+
+        function filterConversations(searchTerm) {
+            const filteredConversations = conversationData.filter(conv => 
+                conv.message.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                conv.intent.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                conv.sessionId.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            displayConversations(filteredConversations);
+        }
+
+        function filterByIntent(intent) {
+            const filteredConversations = intent ? conversationData.filter(conv => conv.intent === intent) : conversationData;
+            displayConversations(filteredConversations);
+        }
+
+        function filterByDate(date) {
+            const filteredConversations = date ? conversationData.filter(conv => conv.timestamp.startsWith(date)) : conversationData;
+            displayConversations(filteredConversations);
+        }
+
+        // Settings functions
+        function updateThresholdValue(value) {
+            document.getElementById('thresholdValue').textContent = value + '%';
+        }
+
+        // Utility functions
+        function generateTimeLabels() {
+            const labels = [];
+            for (let i = 19; i >= 0; i--) {
+                const date = new Date();
+                date.setMinutes(date.getMinutes() - i * 5);
+                labels.push(date.toLocaleTimeString('en-US', { hour12: false }).slice(0, 5));
+            }
+            return labels;
+        }
+
+        function generateRandomData(count, min, max) {
+            return Array.from({length: count}, () => Math.floor(Math.random() * (max - min + 1)) + min);
+        }
+
+        // Chart update function
+        function updateChart(period) {
+            if (!charts.conversation) return;
+            
+            let newData, newLabels;
+            switch(period) {
+                case '7':
+                    newLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+                    newData = [120, 150, 180, 140, 200, 160, 190];
+                    break;
+                case '30':
+                    newLabels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+                    newData = [800, 950, 720, 1100];
+                    break;
+                case '90':
+                    newLabels = ['Month 1', 'Month 2', 'Month 3'];
+                    newData = [2800, 3200, 2900];
+                    break;
+            }
+            
+            charts.conversation.data.labels = newLabels;
+            charts.conversation.data.datasets[0].data = newData;
+            charts.conversation.update();
+        }
+
+        // API simulation functions
+        function refreshData() {
+            showNotification('Refreshing data...', 'info');
+            setTimeout(() => {
+                updateStats();
+                loadDashboardData();
+                showNotification('Data refreshed successfully!', 'success');
+            }, 2000);
+        }
+
+        function exportReport() {
+            showNotification('Generating report...', 'info');
+            setTimeout(() => {
+                showNotification('Report exported successfully!', 'success');
+            }, 2000);
+        }
+
+        function exportUsers() {
+            showNotification('Exporting user data...', 'info');
+            setTimeout(() => {
+                showNotification('User data exported successfully!', 'success');
+            }, 1500);
+        }
+
+        function exportConversations() {
+            showNotification('Exporting conversation logs...', 'info');
+            setTimeout(() => {
+                showNotification('Conversation logs exported successfully!', 'success');
+            }, 2000);
+        }
+
+        function generateReport() {
+            showNotification('Generating analytics report...', 'info');
+            setTimeout(() => {
+                showNotification('Analytics report generated successfully!', 'success');
+            }, 3000);
+        }
+
+        function saveSettings() {
+            showNotification('Saving settings...', 'info');
+            setTimeout(() => {
+                showNotification('Settings saved successfully!', 'success');
+            }, 1500);
+        }
+
+        function resetSettings() {
+            if (confirm('Are you sure you want to reset all settings to default?')) {
+                showNotification('Resetting settings...', 'info');
+                setTimeout(() => {
+                    // Reset form values
+                    document.getElementById('confidenceThreshold').value = 70;
+                    document.getElementById('thresholdValue').textContent = '70%';
+                    document.getElementById('sessionTimeout').value = 60;
+                    document.getElementById('maxConversations').value = 50;
+                    document.getElementById('enablePersonalization').checked = true;
+                    document.getElementById('responseDelay').value = 500;
+                    document.getElementById('fallbackResponse').value = "I apologize, but I didn't understand your question. Could you please rephrase it?";
+                    document.getElementById('adminEmail').value = '';
+                    document.getElementById('backupFrequency').value = 'daily';
+                    document.getElementById('logRetention').value = 30;
+                    
+                    showNotification('Settings reset to default values!', 'success');
+                }, 1500);
+            }
+        }
+
+        function runDiagnostics() {
+            showNotification('Running system diagnostics...', 'info');
+            setTimeout(() => {
+                showNotification('System diagnostics completed - All systems normal!', 'success');
+            }, 3000);
+        }
+
+        function restartSystem() {
+            if (confirm('Are you sure you want to restart the system? This will temporarily interrupt service.')) {
+                showNotification('System restart initiated...', 'info');
+                setTimeout(() => {
+                    showNotification('System restarted successfully!', 'success');
+                }, 5000);
+            }
+        }
+
+        function trainModel() {
+            showNotification('Model training started...', 'info');
+            setTimeout(() => {
+                showNotification('Model training completed successfully!', 'success');
+            }, 5000);
+        }
+
+        function retrainModel() {
+            showNotification('Retraining model with updated data...', 'info');
+            setTimeout(() => {
+                showNotification('Model retrained successfully!', 'success');
+            }, 4000);
+        }
+
+        function clearLogs() {
+            if (confirm('Are you sure you want to clear all system logs?')) {
+                document.getElementById('systemLogs').innerHTML = '<div style="color: #64748b; text-align: center; padding: 20px;">Logs cleared</div>';
+                showNotification('System logs cleared!', 'success');
+            }
+        }
+
+        function testAutomation() {
+            showNotification('Testing automation rules...', 'info');
+            setTimeout(() => {
+                showNotification('Automation test completed - 3 rules triggered successfully!', 'success');
+            }, 2500);
+        }
+
+        function manageRules() {
+            showNotification('Opening rule management interface...', 'info');
+        }
+
+        // CRUD operations
+        function editUser(email) {
+            showNotification(`Opening edit interface for ${email}...`, 'info');
+        }
+
+        function deleteUser(email) {
+            if (confirm(`Are you sure you want to delete user ${email}?`)) {
+                userData = userData.filter(user => user.email !== email);
+                displayUsers(userData);
+                showNotification(`User ${email} deleted successfully!`, 'success');
+            }
+        }
+
+        function viewConversation(sessionId) {
+            showNotification(`Opening conversation details for ${sessionId}...`, 'info');
+        }
+
+        function exportConversation(sessionId) {
+            showNotification(`Exporting conversation ${sessionId}...`, 'info');
+            setTimeout(() => {
+                showNotification(`Conversation ${sessionId} exported successfully!`, 'success');
+            }, 1000);
+        }
+
+        function editIntent(tag) {
+            showNotification(`Opening intent editor for ${tag}...`, 'info');
+        }
+
+        function deleteIntent(tag) {
+            if (confirm(`Are you sure you want to delete intent ${tag}?`)) {
+                showNotification(`Intent ${tag} deleted successfully!`, 'success');
+                loadIntentsTable();
+            }
+        }
+
+        function editRule(name) {
+            showNotification(`Opening rule editor for ${name}...`, 'info');
+        }
+
+        function toggleRule(name) {
+            showNotification(`Toggling rule ${name}...`, 'info');
+            setTimeout(() => {
+                showNotification(`Rule ${name} status updated successfully!`, 'success');
+                loadAutomationTable();
+            }, 1000);
+        }
+
+        // Notification system
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.classList.add('show'), 100);
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Real-time updates
+        function startRealTimeUpdates() {
+            setInterval(() => {
+                if (realTimeMode) {
+                    updateStats();
+                    if (currentPage === 'monitoring') {
+                        updateSystemLogs();
+                        // Update performance chart with new data
+                        if (charts.performance) {
+                            const newLabels = generateTimeLabels();
+                            const newCpuData = generateRandomData(20, 30, 80);
+                            const newMemoryData = generateRandomData(20, 50, 90);
+                            
+                            charts.performance.data.labels = newLabels;
+                            charts.performance.data.datasets[0].data = newCpuData;
+                            charts.performance.data.datasets[1].data = newMemoryData;
+                            charts.performance.update('none');
+                        }
+                    }
+                }
+            }, 5000);
+        }
+
+        function realTimeToggle() {
+            realTimeMode = !realTimeMode;
+            const btn = event.target;
+            btn.innerHTML = realTimeMode ? '<span>🟢</span> Real-time ON' : '<span>🔴</span> Real-time View';
+            btn.className = realTimeMode ? 'btn btn-success' : 'btn btn-primary';
+            showNotification(`Real-time mode ${realTimeMode ? 'enabled' : 'disabled'}`, 'info');
+        }
+
+        // Load page-specific data
+        function loadPageData(pageId) {
+            switch(pageId) {
+                case 'dashboard':
+                    loadDashboardData();
+                    break;
+                case 'analytics':
+                    setTimeout(() => {
+                        if (charts.intent) charts.intent.update();
+                        if (charts.engagement) charts.engagement.update();
+                    }, 100);
+                    loadTopicsTable();
+                    break;
+                case 'users':
+                    loadUsersTable();
+                    break;
+                case 'conversations':
+                    loadConversationsTable();
+                    break;
+                case 'intents':
+                    loadIntentsTable();
+                    break;
+                case 'monitoring':
+                    updateSystemLogs();
+                    setTimeout(() => {
+                        if (charts.performance) charts.performance.update();
+                    }, 100);
+                    break;
+                case 'automation':
+                    loadAutomationTable();
+                    break;
+            }
+        }
+
+        // Form submissions
+        document.addEventListener('submit', function(e) {
+            if (e.target.id === 'addUserForm') {
+                e.preventDefault();
+                const username = document.getElementById('newUsername').value;
+                const email = document.getElementById('newUserEmail').value;
+                const role = document.getElementById('newUserRole').value;
+                
+                // Add to userData array
+                userData.push({
+                    name: username,
+                    email: email,
+                    role: role,
+                    status: 'offline',
+                    lastLogin: 'Never',
+                    sessions: 0
+                });
+                
+                displayUsers(userData);
+                showNotification('User added successfully!', 'success');
+                closeModal('addUserModal');
+                
+                // Reset form
+                e.target.reset();
+            }
+            
+            if (e.target.id === 'addIntentForm') {
+                e.preventDefault();
+                const intentName = document.getElementById('newIntentName').value;
+                showNotification(`Intent "${intentName}" added successfully!`, 'success');
+                closeModal('addIntentModal');
+                loadIntentsTable();
+                e.target.reset();
+            }
+            
+            if (e.target.id === 'addRuleForm') {
+                e.preventDefault();
+                const ruleName = document.getElementById('newRuleName').value;
+                showNotification(`Automation rule "${ruleName}" added successfully!`, 'success');
+                closeModal('addRuleModal');
+                loadAutomationTable();
+                e.target.reset();
+            }
+        });
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Initialize range slider
+        document.addEventListener('DOMContentLoaded', function() {
+            const rangeInput = document.getElementById('confidenceThreshold');
+            if (rangeInput) {
+                rangeInput.addEventListener('input', function() {
+                    updateThresholdValue(this.value);
+                });
+            }
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey) {
+                switch(e.key) {
+                    case 'r':
+                        e.preventDefault();
+                        refreshData();
+                        break;
+                    case 's':
+                        e.preventDefault();
+                        if (currentPage === 'settings') {
+                            saveSettings();
+                        }
+                        break;
+                    case 'Escape':
+                        // Close any open modals
+                        document.querySelectorAll('.modal').forEach(modal => {
+                            modal.style.display = 'none';
+                        });
+                        break;
+                }
+            }
+        });
+
+        // Auto-save settings (every 30 seconds if changes detected)
+        let settingsChanged = false;
+        let autoSaveInterval;
+
+        function startAutoSave() {
+            const settingsInputs = document.querySelectorAll('#settings input, #settings select, #settings textarea');
+            settingsInputs.forEach(input => {
+                input.addEventListener('change', () => {
+                    settingsChanged = true;
+                });
+            });
+
+            autoSaveInterval = setInterval(() => {
+                if (settingsChanged && currentPage === 'settings') {
+                    showNotification('Auto-saving settings...', 'info');
+                    setTimeout(() => {
+                        showNotification('Settings auto-saved!', 'success');
+                        settingsChanged = false;
+                    }, 1000);
+                }
+            }, 30000);
+        }
+
+        // Initialize auto-save
+        setTimeout(startAutoSave, 2000);
+
+        // Performance optimization - lazy load charts
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const chartObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const chartId = entry.target.id;
+                    if (charts[chartId.replace('Chart', '')]) {
+                        charts[chartId.replace('Chart', '')].resize();
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe chart containers
+        setTimeout(() => {
+            document.querySelectorAll('canvas').forEach(canvas => {
+                chartObserver.observe(canvas);
+            });
+        }, 1000);
+
+        // Add tooltips to buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(btn => {
+                if (!btn.title) {
+                    const text = btn.textContent.trim();
+                    if (text.includes('Refresh')) btn.title = 'Ctrl+R';
+                    if (text.includes('Save')) btn.title = 'Ctrl+S';
+                    if (text.includes('Export')) btn.title = 'Download data';
+                    if (text.includes('Add')) btn.title = 'Create new item';
+                    if (text.includes('Edit')) btn.title = 'Modify existing item';
+                    if (text.includes('Delete')) btn.title = 'Remove item permanently';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
